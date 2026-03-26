@@ -1,0 +1,7 @@
+<div id="<%= dom_id(comment) %>" class="py-4 border-b border-ink-50 last:border-0">
+  <div class="flex items-baseline gap-2 mb-1">
+    <span class="text-sm font-medium text-ink-800"><%= comment.name %></span>
+    <span class="text-xs text-ink-300"><%= time_ago_in_words(comment.created_at) %> ago</span>
+  </div>
+  <p class="text-sm text-ink-600 leading-relaxed"><%= comment.body %></p>
+</div>

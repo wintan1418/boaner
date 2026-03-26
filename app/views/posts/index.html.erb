@@ -1,0 +1,33 @@
+<% content_for(:title) { "Blog — Boaner" } %>
+
+<section class="max-w-3xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+  <div class="mb-10">
+    <h1 class="text-3xl font-bold text-ink-900" style="font-family: 'Source Serif 4', Georgia, serif;">Blog</h1>
+    <p class="mt-1 text-ink-400">Stories, essays, and reflections.</p>
+  </div>
+
+  <% if @categories.any? %>
+    <div class="flex flex-wrap gap-2 mb-8 border-b border-ink-100 pb-4">
+      <%= link_to "All", posts_path,
+        class: "px-3 py-1.5 rounded text-sm #{params[:category].blank? ? 'bg-ink-900 text-white' : 'text-ink-500 hover:text-ink-800'}",
+        data: { turbo_frame: "posts_list" } %>
+      <% @categories.each do |cat| %>
+        <%= link_to cat, posts_path(category: cat),
+          class: "px-3 py-1.5 rounded text-sm #{params[:category] == cat ? 'bg-ink-900 text-white' : 'text-ink-500 hover:text-ink-800'}",
+          data: { turbo_frame: "posts_list" } %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "posts_list" do %>
+    <% if @posts.any? %>
+      <div>
+        <% @posts.each do |post| %>
+          <%= render "posts/card", post: post %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="text-ink-400 py-12 text-center">No posts in this category yet.</p>
+    <% end %>
+  <% end %>
+</section>

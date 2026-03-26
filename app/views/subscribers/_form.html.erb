@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "newsletter_form" do %>
+  <%= form_with url: subscribers_path, class: "flex flex-col sm:flex-row gap-3 max-w-md mx-auto" do |f| %>
+    <%= f.email_field :email,
+      placeholder: "your@email.com",
+      required: true,
+      class: "flex-1 px-3 py-2.5 rounded-md border border-ink-700 bg-ink-800 text-white placeholder-ink-500 text-sm focus:outline-none focus:ring-1 focus:ring-ink-500 focus:border-ink-500" %>
+    <%= f.submit "Subscribe",
+      class: "px-5 py-2.5 bg-white text-ink-900 text-sm font-medium rounded-md hover:bg-ink-100 transition-colors cursor-pointer" %>
+  <% end %>
+<% end %>

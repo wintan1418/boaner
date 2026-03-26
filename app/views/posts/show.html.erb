@@ -1,0 +1,53 @@
+<% content_for(:title) { "#{@post.title} — Boaner" } %>
+
+<article class="max-w-2xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+  <div class="mb-6">
+    <%= link_to "Blog", posts_path, class: "text-sm text-ink-400 hover:text-ink-700 transition-colors" %>
+    <span class="text-ink-300 mx-1">/</span>
+  </div>
+
+  <header class="mb-8">
+    <div class="flex items-center gap-3 text-xs text-ink-400 mb-3">
+      <% if @post.category.present? %>
+        <span class="uppercase tracking-wider"><%= @post.category %></span>
+        <span>&middot;</span>
+      <% end %>
+      <% if @post.published_at %>
+        <span><%= @post.published_at.strftime("%B %d, %Y") %></span>
+        <span>&middot;</span>
+      <% end %>
+      <span><%= @post.reading_time %></span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold text-ink-900 leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @post.title %></h1>
+  </header>
+
+  <div class="prose-content text-ink-700">
+    <%= @post.body %>
+  </div>
+
+  <!-- Comments -->
+  <div class="border-t border-ink-100 mt-12 pt-8">
+    <h2 class="text-lg font-semibold text-ink-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">Comments</h2>
+
+    <div class="mb-8">
+      <%= form_with model: [@post, @comment], url: post_comments_path(@post), class: "space-y-4" do |f| %>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <%= f.text_field :name, required: true, placeholder: "Your name", class: "w-full px-3 py-2.5 rounded-md border border-ink-200 text-sm focus:outline-none focus:ring-1 focus:ring-ink-400 focus:border-ink-400" %>
+          </div>
+        </div>
+        <%= f.text_area :body, required: true, rows: 3, placeholder: "Write a comment...", class: "w-full px-3 py-2.5 rounded-md border border-ink-200 text-sm focus:outline-none focus:ring-1 focus:ring-ink-400 focus:border-ink-400 resize-none" %>
+        <%= f.submit "Post Comment", class: "px-4 py-2 bg-ink-900 text-white text-sm font-medium rounded-md hover:bg-ink-800 transition-colors cursor-pointer" %>
+      <% end %>
+    </div>
+
+    <div id="comments">
+      <% @comments.each do |comment| %>
+        <%= render "comments/comment", comment: comment %>
+      <% end %>
+      <% if @comments.empty? %>
+        <p class="text-ink-400 text-sm text-center py-6">No comments yet. Be the first.</p>
+      <% end %>
+    </div>
+  </div>
+</article>
