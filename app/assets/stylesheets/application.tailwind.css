@@ -58,6 +58,12 @@ trix-editor {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Birthday reveal emoji fall */
+@keyframes emoji-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
 /* Scroll fade-in */
 .fade-in {
   opacity: 0;

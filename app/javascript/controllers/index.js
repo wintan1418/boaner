@@ -26,3 +26,6 @@ application.register("reading-list", ReadingListController)
 
 import SearchController from "./search_controller"
 application.register("search", SearchController)
+
+import RevealController from "./reveal_controller"
+application.register("reveal", RevealController)
