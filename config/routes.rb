@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :books
     resources :comments, only: [ :index, :update, :destroy ]
     resources :subscribers, only: [ :index, :destroy ]
-    resource :settings, only: [ :edit, :update ]
+    resource :settings, only: [ :edit, :update ] do
+      post :sync_youtube, on: :member
+    end
   end
 
   root "home#index"

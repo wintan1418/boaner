@@ -101,9 +101,15 @@ SiteSetting.instance
 puts "  Site settings initialized"
 
 puts "Done!"
+
 if Rails.env.development?
-  AdminUser.find_or_create_by!(email: 'admin@example.com') do |admin|
-    admin.password = 'password'
-    admin.password_confirmation = 'password'
+  AdminUser.find_or_create_by!(email: "admin@example.com") do |admin|
+    admin.password = "password"
+    admin.password_confirmation = "password"
   end
+end
+
+# Load production seeds if in production or if explicitly requested
+if Rails.env.production? || ENV["SEED_PRODUCTION"]
+  load Rails.root.join("db/seeds/production.rb")
 end

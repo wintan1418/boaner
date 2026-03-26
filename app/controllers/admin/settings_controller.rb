@@ -13,6 +13,16 @@ module Admin
       end
     end
 
+    def sync_youtube
+      result = YoutubeSyncService.new.sync!
+
+      if result[:error]
+        redirect_to edit_admin_settings_path, alert: "Sync failed: #{result[:error]}"
+      else
+        redirect_to edit_admin_settings_path, notice: "YouTube sync complete! #{result[:created]} new, #{result[:updated]} updated."
+      end
+    end
+
     private
 
     def settings_params
@@ -20,6 +30,7 @@ module Admin
         :site_name, :tagline, :hero_heading, :hero_subheading,
         :bio_short, :bio_long, :email,
         :youtube_url, :twitter_url, :instagram_url, :linkedin_url,
+        :youtube_channel_id, :youtube_api_key, :youtube_auto_sync,
         :profile_image, :hero_background
       )
     end
