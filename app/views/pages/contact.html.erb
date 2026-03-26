@@ -1,50 +1,76 @@
 <% content_for(:title) { "Contact — Boaner" } %>
 
-<section class="max-w-2xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-  <div class="mb-10">
-    <h1 class="text-3xl font-bold text-stone-900" style="font-family: 'Source Serif 4', Georgia, serif;">Contact</h1>
-    <p class="mt-1 text-stone-400">For speaking engagements, collaborations, or general inquiries.</p>
+<!-- Hero Header -->
+<section class="bg-gray-950 hero-pattern relative overflow-hidden">
+  <div class="absolute bottom-10 right-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative">
+    <h1 class="text-4xl md:text-5xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;">Contact</h1>
+    <p class="mt-3 text-gray-400 text-lg">For speaking engagements, collaborations, or general inquiries.</p>
+    <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-4"></div>
   </div>
+</section>
 
-  <div class="grid sm:grid-cols-3 gap-4 mb-10 text-sm">
-    <div class="border border-stone-100 rounded-md p-4">
-      <p class="font-medium text-stone-800 mb-1">Email</p>
-      <p class="text-stone-400"><%= @settings.email %></p>
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+  <div class="grid lg:grid-cols-5 gap-10">
+    <!-- Info Cards (Left) -->
+    <div class="lg:col-span-2 space-y-4">
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-300">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-4 shadow-sm shadow-amber-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <p class="font-bold text-gray-900 mb-1">Email</p>
+        <p class="text-gray-500 text-sm"><%= @settings.email %></p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-300">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-4 shadow-sm shadow-blue-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+        </div>
+        <p class="font-bold text-gray-900 mb-1">Speaking</p>
+        <p class="text-gray-500 text-sm">Available for events and conferences.</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-amber-200 transition-all duration-300">
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center mb-4 shadow-sm shadow-green-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <p class="font-bold text-gray-900 mb-1">Response Time</p>
+        <p class="text-gray-500 text-sm">Usually within 48 hours.</p>
+      </div>
     </div>
-    <div class="border border-stone-100 rounded-md p-4">
-      <p class="font-medium text-stone-800 mb-1">Speaking</p>
-      <p class="text-stone-400">Available for events</p>
-    </div>
-    <div class="border border-stone-100 rounded-md p-4">
-      <p class="font-medium text-stone-800 mb-1">Response</p>
-      <p class="text-stone-400">Within 48 hours</p>
+
+    <!-- Contact Form (Right) -->
+    <div class="lg:col-span-3">
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+        <h2 class="text-xl font-bold text-gray-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">Send a Message</h2>
+
+        <%= turbo_frame_tag "contact_form" do %>
+          <%= form_with url: contact_path, method: :post, class: "space-y-5", data: { controller: "form-validation" } do |f| %>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <%= f.label :name, "Name", class: "block text-sm font-semibold text-gray-700 mb-1.5" %>
+                <%= f.text_field :name, required: true, class: "w-full px-4 py-3 rounded-lg border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors" %>
+              </div>
+              <div>
+                <%= f.label :email, "Email", class: "block text-sm font-semibold text-gray-700 mb-1.5" %>
+                <%= f.email_field :email, required: true, class: "w-full px-4 py-3 rounded-lg border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors" %>
+              </div>
+            </div>
+
+            <div>
+              <%= f.label :subject, "Subject", class: "block text-sm font-semibold text-gray-700 mb-1.5" %>
+              <%= f.select :subject, ["Speaking Engagement", "Collaboration", "General Inquiry"], { prompt: "Select a topic" }, class: "w-full px-4 py-3 rounded-lg border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors" %>
+            </div>
+
+            <div>
+              <%= f.label :message, "Message", class: "block text-sm font-semibold text-gray-700 mb-1.5" %>
+              <%= f.text_area :message, required: true, rows: 5, class: "w-full px-4 py-3 rounded-lg border border-gray-200 text-sm bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 resize-none transition-colors" %>
+            </div>
+
+            <%= f.submit "Send Message", class: "w-full sm:w-auto px-8 py-3 btn-amber text-white text-sm font-semibold rounded-lg cursor-pointer" %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <%= turbo_frame_tag "contact_form" do %>
-    <%= form_with url: contact_path, method: :post, class: "space-y-5", data: { controller: "form-validation" } do |f| %>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div>
-          <%= f.label :name, "Name", class: "block text-sm font-medium text-stone-700 mb-1" %>
-          <%= f.text_field :name, required: true, class: "w-full px-3 py-2.5 rounded-md border border-stone-200 text-sm focus:outline-none focus:ring-1 focus:ring-stone-400 focus:border-stone-400" %>
-        </div>
-        <div>
-          <%= f.label :email, "Email", class: "block text-sm font-medium text-stone-700 mb-1" %>
-          <%= f.email_field :email, required: true, class: "w-full px-3 py-2.5 rounded-md border border-stone-200 text-sm focus:outline-none focus:ring-1 focus:ring-stone-400 focus:border-stone-400" %>
-        </div>
-      </div>
-
-      <div>
-        <%= f.label :subject, "Subject", class: "block text-sm font-medium text-stone-700 mb-1" %>
-        <%= f.select :subject, ["Speaking Engagement", "Collaboration", "General Inquiry"], { prompt: "Select" }, class: "w-full px-3 py-2.5 rounded-md border border-stone-200 text-sm focus:outline-none focus:ring-1 focus:ring-stone-400 focus:border-stone-400 bg-white" %>
-      </div>
-
-      <div>
-        <%= f.label :message, "Message", class: "block text-sm font-medium text-stone-700 mb-1" %>
-        <%= f.text_area :message, required: true, rows: 5, class: "w-full px-3 py-2.5 rounded-md border border-stone-200 text-sm focus:outline-none focus:ring-1 focus:ring-stone-400 focus:border-stone-400 resize-none" %>
-      </div>
-
-      <%= f.submit "Send Message", class: "px-5 py-2.5 bg-stone-900 text-white text-sm font-medium rounded-md hover:bg-stone-800 transition-colors cursor-pointer" %>
-    <% end %>
-  <% end %>
 </section>

@@ -1,6 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  # Admin
+  namespace :admin do
+    get "/", to: "dashboard#index"
+    get "login", to: "sessions#new"
+    post "login", to: "sessions#create"
+    delete "logout", to: "sessions#destroy"
+    resources :videos
+    resources :posts
+    resources :courses do
+      resources :lessons, except: [ :index ]
+    end
+    resources :books
+    resources :comments, only: [ :index, :update, :destroy ]
+    resources :subscribers, only: [ :index, :destroy ]
+    resource :settings, only: [ :edit, :update ]
+  end
+
   root "home#index"
 
   resources :videos, only: [ :index, :show ] do

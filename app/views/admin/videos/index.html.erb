@@ -1,0 +1,71 @@
+<% content_for(:title, "Videos — Boaner Admin") %>
+
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">Videos</h1>
+    <p class="text-gray-500 text-sm mt-1">Manage your YouTube video catalog.</p>
+  </div>
+  <a href="<%= new_admin_video_path %>" class="inline-flex items-center px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
+    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+    Add Video
+  </a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-gray-50 border-b border-gray-200">
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Video</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Category</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Published</th>
+        <th class="text-right px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @videos.each_with_index do |video, i| %>
+        <tr class="<%= i.odd? ? 'bg-gray-50/50' : '' %> hover:bg-gray-50 transition-colors">
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <img src="<%= video.thumbnail_url_hq %>" class="w-20 h-11 object-cover rounded mr-4 flex-shrink-0" alt="" loading="lazy">
+              <div class="min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate"><%= video.title %></p>
+                <p class="text-xs text-gray-400 mt-0.5"><%= video.youtube_id %></p>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <% if video.category.present? %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700"><%= video.category %></span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4">
+            <% if video.featured? %>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Featured</span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4 text-sm text-gray-500">
+            <%= video.published_at&.strftime("%b %d, %Y") || "Draft" %>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end space-x-2">
+              <a href="<%= edit_admin_video_path(video) %>" class="text-gray-400 hover:text-amber-600 transition-colors p-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+              </a>
+              <%= button_to admin_video_path(video), method: :delete, data: { turbo_confirm: "Delete this video?" }, class: "text-gray-400 hover:text-red-500 transition-colors p-1" do %>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @videos.empty? %>
+    <div class="px-6 py-16 text-center">
+      <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <p class="text-gray-500 text-sm">No videos yet.</p>
+      <a href="<%= new_admin_video_path %>" class="text-amber-600 hover:text-amber-700 text-sm font-medium mt-1 inline-block">Add your first video</a>
+    </div>
+  <% end %>
+</div>

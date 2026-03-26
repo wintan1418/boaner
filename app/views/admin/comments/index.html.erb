@@ -1,0 +1,71 @@
+<% content_for(:title, "Comments — Boaner Admin") %>
+
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-gray-900">Comments</h1>
+  <p class="text-gray-500 text-sm mt-1">Review, approve, or remove user comments.</p>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <table class="w-full">
+    <thead>
+      <tr class="bg-gray-50 border-b border-gray-200">
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Commenter</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Comment</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">On</th>
+        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+        <th class="text-right px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100">
+      <% @comments.each_with_index do |comment, i| %>
+        <tr class="<%= i.odd? ? 'bg-gray-50/50' : '' %> hover:bg-gray-50 transition-colors">
+          <td class="px-6 py-4">
+            <div class="flex items-center">
+              <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs font-bold mr-3 flex-shrink-0">
+                <%= comment.name.first.upcase %>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900"><%= comment.name %></p>
+                <p class="text-xs text-gray-400"><%= comment.created_at.strftime("%b %d, %Y at %l:%M %p") %></p>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4">
+            <p class="text-sm text-gray-700 max-w-xs truncate"><%= truncate(comment.body, length: 100) %></p>
+          </td>
+          <td class="px-6 py-4">
+            <% if comment.commentable %>
+              <p class="text-sm text-gray-500">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600"><%= comment.commentable_type %></span>
+                <span class="text-gray-700 ml-1"><%= truncate(comment.commentable.title, length: 30) %></span>
+              </p>
+            <% else %>
+              <span class="text-sm text-gray-400">Deleted</span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= comment.approved? ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700' %>">
+              <%= comment.approved? ? 'Approved' : 'Pending' %>
+            </span>
+          </td>
+          <td class="px-6 py-4 text-right">
+            <div class="flex items-center justify-end space-x-2">
+              <%= button_to admin_comment_path(comment), method: :patch, class: "inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg transition-colors #{comment.approved? ? 'bg-amber-100 text-amber-700 hover:bg-amber-200' : 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'}" do %>
+                <%= comment.approved? ? 'Unapprove' : 'Approve' %>
+              <% end %>
+              <%= button_to admin_comment_path(comment), method: :delete, data: { turbo_confirm: "Delete this comment?" }, class: "inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-lg bg-red-100 text-red-700 hover:bg-red-200 transition-colors" do %>
+                Delete
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @comments.empty? %>
+    <div class="px-6 py-16 text-center">
+      <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+      <p class="text-gray-500 text-sm">No comments yet.</p>
+    </div>
+  <% end %>
+</div>

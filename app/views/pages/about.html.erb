@@ -1,57 +1,89 @@
 <% content_for(:title) { "About — Boaner" } %>
 
-<section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 md:py-16">
-  <div class="grid md:grid-cols-5 gap-10 md:gap-14">
-    <!-- Photo -->
-    <div class="md:col-span-2">
-      <div class="aspect-[4/5] rounded-md overflow-hidden bg-stone-100 sticky top-20">
-        <%= render "shared/profile_image" %>
-      </div>
-    </div>
-
-    <!-- Bio -->
-    <div class="md:col-span-3">
-      <h1 class="text-3xl font-bold text-stone-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">About</h1>
-
-      <div class="text-stone-600 space-y-4 leading-relaxed">
-        <p class="text-lg text-stone-700"><%= @settings.bio_short %></p>
-        <p><%= @settings.bio_long %></p>
-      </div>
-
-      <div class="border-t border-stone-100 mt-8 pt-8">
-        <h2 class="text-sm font-semibold text-stone-400 uppercase tracking-widest mb-4">What I do</h2>
-        <dl class="space-y-4">
-          <div class="flex gap-3">
-            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Video</dt>
-            <dd class="text-sm text-stone-500">Creating YouTube content — stories, ideas, and conversations.</dd>
-          </div>
-          <div class="flex gap-3">
-            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Teaching</dt>
-            <dd class="text-sm text-stone-500">University lectures and online courses for curious minds.</dd>
-          </div>
-          <div class="flex gap-3">
-            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Writing</dt>
-            <dd class="text-sm text-stone-500">Published books and the occasional blog post.</dd>
-          </div>
-        </dl>
-      </div>
-
-      <% if @settings.youtube_url.present? || @settings.twitter_url.present? || @settings.instagram_url.present? || @settings.linkedin_url.present? %>
-        <div class="border-t border-stone-100 mt-8 pt-8">
-          <h2 class="text-sm font-semibold text-stone-400 uppercase tracking-widest mb-4">Elsewhere</h2>
-          <div class="flex gap-4">
-            <% { youtube_url: "YouTube", twitter_url: "X/Twitter", instagram_url: "Instagram", linkedin_url: "LinkedIn" }.each do |method, label| %>
-              <% if @settings.send(method).present? %>
-                <%= link_to label, @settings.send(method), target: "_blank", rel: "noopener", class: "text-sm text-stone-500 hover:text-stone-800 transition-colors" %>
-              <% end %>
-            <% end %>
+<!-- Hero section -->
+<section class="bg-gray-950 hero-pattern relative overflow-hidden">
+  <div class="absolute top-10 right-10 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl"></div>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 relative">
+    <div class="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+      <!-- Photo -->
+      <div class="md:col-span-2">
+        <div class="relative">
+          <div class="absolute -inset-3 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl blur-sm"></div>
+          <div class="relative aspect-[4/5] rounded-2xl overflow-hidden ring-2 ring-amber-500/30">
+            <%= render "shared/profile_image" %>
           </div>
         </div>
-      <% end %>
+      </div>
 
-      <div class="mt-8 pt-8 border-t border-stone-100">
-        <%= link_to "Get in touch &rarr;".html_safe, contact_path, class: "text-sm font-medium text-stone-800 hover:text-stone-600 transition-colors" %>
+      <!-- Bio -->
+      <div class="md:col-span-3">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">About</h1>
+        <p class="text-xl text-amber-400 font-medium mb-4"><%= @settings.bio_short %></p>
+        <p class="text-gray-400 leading-relaxed text-lg"><%= @settings.bio_long %></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- What I Do Section -->
+<section class="bg-white py-20 md:py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-3" style="font-family: 'Source Serif 4', Georgia, serif;">What I Do</h2>
+    <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mb-12"></div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Video Card -->
+      <div class="bg-gray-50 rounded-xl p-8 border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all duration-300 card-hover">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center mb-5 shadow-md shadow-red-500/20">
+          <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2" style="font-family: 'Source Serif 4', Georgia, serif;">Video</h3>
+        <p class="text-gray-500 leading-relaxed">Creating YouTube content — stories, ideas, and conversations.</p>
+      </div>
+
+      <!-- Teaching Card -->
+      <div class="bg-gray-50 rounded-xl p-8 border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all duration-300 card-hover">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mb-5 shadow-md shadow-blue-500/20">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2" style="font-family: 'Source Serif 4', Georgia, serif;">Teaching</h3>
+        <p class="text-gray-500 leading-relaxed">University lectures and online courses for curious minds.</p>
+      </div>
+
+      <!-- Writing Card -->
+      <div class="bg-gray-50 rounded-xl p-8 border border-gray-100 hover:border-amber-200 hover:shadow-lg transition-all duration-300 card-hover">
+        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-5 shadow-md shadow-amber-500/20">
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+        </div>
+        <h3 class="text-lg font-bold text-gray-900 mb-2" style="font-family: 'Source Serif 4', Georgia, serif;">Writing</h3>
+        <p class="text-gray-500 leading-relaxed">Published books and the occasional blog post.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social / Elsewhere -->
+<% if @settings.youtube_url.present? || @settings.twitter_url.present? || @settings.instagram_url.present? || @settings.linkedin_url.present? %>
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8" style="font-family: 'Source Serif 4', Georgia, serif;">Find Me Elsewhere</h2>
+      <div class="flex flex-wrap gap-4">
+        <% { youtube_url: ["YouTube", "from-red-500 to-red-600"], twitter_url: ["X/Twitter", "from-gray-700 to-gray-900"], instagram_url: ["Instagram", "from-pink-500 to-purple-600"], linkedin_url: ["LinkedIn", "from-blue-600 to-blue-700"] }.each do |method, (label, gradient)| %>
+          <% if @settings.send(method).present? %>
+            <%= link_to label, @settings.send(method), target: "_blank", rel: "noopener", class: "inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r #{gradient} text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-md" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<!-- CTA -->
+<section class="bg-gradient-to-br from-amber-500 via-amber-600 to-orange-500 relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/3"></div>
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-16 md:py-20 text-center">
+    <h2 class="text-3xl font-bold text-gray-900" style="font-family: 'Source Serif 4', Georgia, serif;">Let's Work Together</h2>
+    <p class="mt-3 text-amber-900/70 text-lg">For speaking engagements, collaborations, or just to say hello.</p>
+    <%= link_to "Get in Touch", contact_path, class: "inline-flex items-center gap-2 mt-8 px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-300 shadow-lg text-sm" %>
   </div>
 </section>

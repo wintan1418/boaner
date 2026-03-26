@@ -1,12 +1,14 @@
 <%= turbo_stream.replace "contact_form" do %>
-  <div id="contact_form" class="bg-stone-50 border border-stone-200 rounded-md p-8 text-center">
-    <svg class="w-10 h-10 text-stone-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-    <h3 class="text-lg font-semibold text-stone-900 mb-1">Message sent.</h3>
-    <p class="text-sm text-stone-500">I'll get back to you as soon as possible.</p>
-    <p class="mt-4">
-      <%= link_to "Send another message", contact_path, class: "text-sm text-stone-600 hover:text-stone-900 font-medium transition-colors" %>
+  <div id="contact_form" class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-10 text-center">
+    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/20">
+      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900 mb-2" style="font-family: 'Source Serif 4', Georgia, serif;">Message sent!</h3>
+    <p class="text-gray-500">I'll get back to you as soon as possible.</p>
+    <p class="mt-6">
+      <%= link_to "Send another message", contact_path, class: "inline-flex items-center gap-2 px-6 py-2.5 btn-amber text-white text-sm font-semibold rounded-lg" %>
     </p>
   </div>
 <% end %>

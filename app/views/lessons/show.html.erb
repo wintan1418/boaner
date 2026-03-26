@@ -1,19 +1,21 @@
 <% content_for(:title) { "#{@lesson.title} — #{@course.title}" } %>
 
-<section class="max-w-2xl mx-auto px-4 sm:px-6 py-10 md:py-14">
-  <div class="mb-6 text-sm text-stone-400">
-    <%= link_to "Courses", courses_path, class: "hover:text-stone-700 transition-colors" %>
-    <span class="mx-1">/</span>
-    <%= link_to @course.title, course_path(@course), class: "hover:text-stone-700 transition-colors" %>
-    <span class="mx-1">/</span>
+<section class="max-w-3xl mx-auto px-4 sm:px-6 py-10 md:py-14">
+  <!-- Breadcrumb -->
+  <div class="mb-6 flex items-center gap-2 text-sm flex-wrap">
+    <%= link_to "Courses", courses_path, class: "text-amber-600 hover:text-amber-700 font-medium transition-colors" %>
+    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <%= link_to @course.title, course_path(@course), class: "text-amber-600 hover:text-amber-700 font-medium transition-colors" %>
+    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
   </div>
 
-  <header class="mb-8">
-    <p class="text-xs text-stone-400 uppercase tracking-wider mb-2">Lesson <%= @lesson.position %></p>
-    <h1 class="text-2xl md:text-3xl font-bold text-stone-900" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @lesson.title %></h1>
+  <header class="mb-10">
+    <span class="inline-block px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-md uppercase tracking-wide mb-3">Lesson <%= @lesson.position %></span>
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @lesson.title %></h1>
+    <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-4"></div>
   </header>
 
-  <div class="prose-content text-stone-700">
+  <div class="prose-content text-gray-700">
     <%= @lesson.body %>
   </div>
 
@@ -21,17 +23,19 @@
   <% prev_lesson = @course.lessons.where("position < ?", @lesson.position).order(position: :desc).first %>
   <% next_lesson = @course.lessons.where("position > ?", @lesson.position).order(position: :asc).first %>
 
-  <div class="border-t border-stone-100 mt-10 pt-6 flex justify-between text-sm">
+  <div class="border-t border-gray-200 mt-12 pt-8 flex justify-between">
     <% if prev_lesson %>
-      <%= link_to course_lesson_path(@course, prev_lesson), class: "text-stone-500 hover:text-stone-800 transition-colors" do %>
-        &larr; <%= prev_lesson.title %>
+      <%= link_to course_lesson_path(@course, prev_lesson), class: "group flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-amber-600 transition-colors" do %>
+        <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <%= prev_lesson.title %>
       <% end %>
     <% else %>
       <div></div>
     <% end %>
     <% if next_lesson %>
-      <%= link_to course_lesson_path(@course, next_lesson), class: "text-stone-500 hover:text-stone-800 transition-colors" do %>
-        <%= next_lesson.title %> &rarr;
+      <%= link_to course_lesson_path(@course, next_lesson), class: "group flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-amber-600 transition-colors" do %>
+        <%= next_lesson.title %>
+        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       <% end %>
     <% end %>
   </div>
