@@ -1,6 +1,6 @@
 module Admin
   class SessionsController < ApplicationController
-    layout "admin"
+    layout "admin_login"
     before_action :redirect_if_authenticated, only: [ :new, :create ]
 
     def new
@@ -10,7 +10,7 @@ module Admin
       admin = AdminUser.find_by(email: params[:email])
       if admin&.valid_password?(params[:password])
         session[:admin_id] = admin.id
-        redirect_to admin_root_path, notice: "Welcome back!"
+        redirect_to admin_path, notice: "Welcome back!"
       else
         flash.now[:alert] = "Invalid email or password."
         render :new, status: :unprocessable_entity
@@ -26,7 +26,7 @@ module Admin
 
     def redirect_if_authenticated
       if session[:admin_id] && AdminUser.exists?(session[:admin_id])
-        redirect_to admin_root_path
+        redirect_to admin_path
       end
     end
   end
