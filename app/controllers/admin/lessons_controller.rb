@@ -39,7 +39,7 @@ module Admin
     private
 
     def set_course
-      @course = Course.find(params[:course_id])
+      @course = Course.find_by(slug: params[:course_id]) || Course.find(params[:course_id])
     end
 
     def set_lesson
