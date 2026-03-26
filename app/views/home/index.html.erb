@@ -4,33 +4,33 @@
 <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-20 md:pt-24 md:pb-28">
   <div class="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
     <div class="md:col-span-3">
-      <p class="text-xs font-semibold text-ink-400 uppercase tracking-widest mb-4"><%= @settings.tagline %></p>
-      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-ink-900 leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;">
+      <p class="text-xs font-semibold text-stone-400 uppercase tracking-widest mb-4"><%= @settings.tagline %></p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-900 leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;">
         <%= @settings.hero_heading %>
       </h1>
-      <p class="mt-5 text-ink-500 text-lg leading-relaxed max-w-md">
+      <p class="mt-5 text-stone-500 text-lg leading-relaxed max-w-md">
         <%= @settings.hero_subheading %>
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <%= link_to "Watch Videos", videos_path, class: "inline-flex items-center gap-2 px-5 py-2.5 bg-ink-900 text-white text-sm font-medium rounded-md hover:bg-ink-800 transition-colors" %>
-        <%= link_to "Read the Blog", posts_path, class: "inline-flex items-center gap-2 px-5 py-2.5 text-ink-600 text-sm font-medium rounded-md border border-ink-200 hover:border-ink-300 hover:text-ink-800 transition-colors" %>
+        <%= link_to "Watch Videos", videos_path, class: "inline-flex items-center gap-2 px-5 py-2.5 bg-stone-900 text-white text-sm font-medium rounded-md hover:bg-stone-800 transition-colors" %>
+        <%= link_to "Read the Blog", posts_path, class: "inline-flex items-center gap-2 px-5 py-2.5 text-stone-600 text-sm font-medium rounded-md border border-stone-200 hover:border-stone-300 hover:text-stone-800 transition-colors" %>
       </div>
     </div>
     <div class="md:col-span-2">
-      <div class="aspect-[4/5] rounded-md overflow-hidden bg-ink-100">
+      <div class="aspect-[4/5] rounded-md overflow-hidden bg-stone-100">
         <%= render "shared/profile_image" %>
       </div>
     </div>
   </div>
 </section>
 
-<div class="border-t border-ink-100"></div>
+<div class="border-t border-stone-100"></div>
 
 <!-- Latest Videos -->
 <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
   <div class="flex items-baseline justify-between mb-8">
-    <h2 class="text-2xl font-bold text-ink-900" style="font-family: 'Source Serif 4', Georgia, serif;">Latest Videos</h2>
-    <%= link_to "View all", videos_path, class: "text-sm text-ink-400 hover:text-ink-700 transition-colors" %>
+    <h2 class="text-2xl font-bold text-stone-900" style="font-family: 'Source Serif 4', Georgia, serif;">Latest Videos</h2>
+    <%= link_to "View all", videos_path, class: "text-sm text-stone-400 hover:text-stone-700 transition-colors" %>
   </div>
 
   <% if @videos.any? %>
@@ -42,17 +42,17 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-ink-400 py-8">Videos coming soon.</p>
+    <p class="text-stone-400 py-8">Videos coming soon.</p>
   <% end %>
 </section>
 
-<div class="border-t border-ink-100"></div>
+<div class="border-t border-stone-100"></div>
 
 <!-- Latest Posts -->
 <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
   <div class="flex items-baseline justify-between mb-8">
-    <h2 class="text-2xl font-bold text-ink-900" style="font-family: 'Source Serif 4', Georgia, serif;">From the Blog</h2>
-    <%= link_to "Read more", posts_path, class: "text-sm text-ink-400 hover:text-ink-700 transition-colors" %>
+    <h2 class="text-2xl font-bold text-stone-900" style="font-family: 'Source Serif 4', Georgia, serif;">From the Blog</h2>
+    <%= link_to "Read more", posts_path, class: "text-sm text-stone-400 hover:text-stone-700 transition-colors" %>
   </div>
 
   <% if @posts.any? %>
@@ -64,17 +64,17 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-ink-400 py-8">Blog posts coming soon.</p>
+    <p class="text-stone-400 py-8">Blog posts coming soon.</p>
   <% end %>
 </section>
 
 <!-- Books -->
 <% if @books.any? %>
-  <div class="border-t border-ink-100"></div>
+  <div class="border-t border-stone-100"></div>
   <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20">
     <div class="flex items-baseline justify-between mb-8">
-      <h2 class="text-2xl font-bold text-ink-900" style="font-family: 'Source Serif 4', Georgia, serif;">Books</h2>
-      <%= link_to "All books", books_path, class: "text-sm text-ink-400 hover:text-ink-700 transition-colors" %>
+      <h2 class="text-2xl font-bold text-stone-900" style="font-family: 'Source Serif 4', Georgia, serif;">Books</h2>
+      <%= link_to "All books", books_path, class: "text-sm text-stone-400 hover:text-stone-700 transition-colors" %>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -88,10 +88,10 @@
 <% end %>
 
 <!-- Newsletter -->
-<section class="bg-ink-900">
+<section class="bg-stone-900">
   <div class="max-w-xl mx-auto px-4 sm:px-6 py-16 text-center">
     <h2 class="text-xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;">Stay updated</h2>
-    <p class="mt-2 text-ink-400 text-sm">New videos, posts, and books — straight to your inbox. No spam.</p>
+    <p class="mt-2 text-stone-400 text-sm">New videos, posts, and books — straight to your inbox. No spam.</p>
     <div class="mt-6">
       <%= render "subscribers/form" %>
     </div>

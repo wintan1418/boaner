@@ -1,12 +1,12 @@
 <%= turbo_stream.replace "contact_form" do %>
-  <div id="contact_form" class="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
-    <svg class="w-12 h-12 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <div id="contact_form" class="bg-stone-50 border border-stone-200 rounded-md p-8 text-center">
+    <svg class="w-10 h-10 text-stone-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
     </svg>
-    <h3 class="text-xl font-semibold text-green-800 mb-2">Message Sent!</h3>
-    <p class="text-green-700">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+    <h3 class="text-lg font-semibold text-stone-900 mb-1">Message sent.</h3>
+    <p class="text-sm text-stone-500">I'll get back to you as soon as possible.</p>
     <p class="mt-4">
-      <%= link_to "Send another message", contact_path, class: "text-brand-600 hover:text-brand-700 font-medium" %>
+      <%= link_to "Send another message", contact_path, class: "text-sm text-stone-600 hover:text-stone-900 font-medium transition-colors" %>
     </p>
   </div>
 <% end %>

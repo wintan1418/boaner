@@ -66,3 +66,5 @@ end
 
 gem "activeadmin", "~> 3.5"
 gem "devise", "~> 5.0"
+
+gem "dartsass-rails", "~> 0.5.1"

@@ -1,5 +1,5 @@
-<%= link_to post_path(post), data: { turbo_frame: "_top" }, class: "group block py-5 border-b border-ink-100 last:border-0" do %>
-  <div class="flex items-center gap-3 text-xs text-ink-400 mb-2">
+<%= link_to post_path(post), data: { turbo_frame: "_top" }, class: "group block py-5 border-b border-stone-100 last:border-0" do %>
+  <div class="flex items-center gap-3 text-xs text-stone-400 mb-2">
     <% if post.category.present? %>
       <span class="uppercase tracking-wider"><%= post.category %></span>
       <span>&middot;</span>
@@ -10,8 +10,8 @@
     <% end %>
     <span><%= post.reading_time %></span>
   </div>
-  <h3 class="text-lg font-semibold text-ink-900 group-hover:text-accent transition-colors leading-snug" style="font-family: 'Source Serif 4', Georgia, serif;"><%= post.title %></h3>
+  <h3 class="text-lg font-semibold text-stone-900 group-hover:text-stone-600 transition-colors leading-snug" style="font-family: 'Source Serif 4', Georgia, serif;"><%= post.title %></h3>
   <% if post.excerpt.present? %>
-    <p class="mt-1.5 text-sm text-ink-500 leading-relaxed line-clamp-2"><%= post.excerpt %></p>
+    <p class="mt-1.5 text-sm text-stone-500 leading-relaxed line-clamp-2"><%= post.excerpt %></p>
   <% end %>
 <% end %>

@@ -4,53 +4,53 @@
   <div class="grid md:grid-cols-5 gap-10 md:gap-14">
     <!-- Photo -->
     <div class="md:col-span-2">
-      <div class="aspect-[4/5] rounded-md overflow-hidden bg-ink-100 sticky top-20">
+      <div class="aspect-[4/5] rounded-md overflow-hidden bg-stone-100 sticky top-20">
         <%= render "shared/profile_image" %>
       </div>
     </div>
 
     <!-- Bio -->
     <div class="md:col-span-3">
-      <h1 class="text-3xl font-bold text-ink-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">About</h1>
+      <h1 class="text-3xl font-bold text-stone-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">About</h1>
 
-      <div class="text-ink-600 space-y-4 leading-relaxed">
-        <p class="text-lg text-ink-700"><%= @settings.bio_short %></p>
+      <div class="text-stone-600 space-y-4 leading-relaxed">
+        <p class="text-lg text-stone-700"><%= @settings.bio_short %></p>
         <p><%= @settings.bio_long %></p>
       </div>
 
-      <div class="border-t border-ink-100 mt-8 pt-8">
-        <h2 class="text-sm font-semibold text-ink-400 uppercase tracking-widest mb-4">What I do</h2>
+      <div class="border-t border-stone-100 mt-8 pt-8">
+        <h2 class="text-sm font-semibold text-stone-400 uppercase tracking-widest mb-4">What I do</h2>
         <dl class="space-y-4">
           <div class="flex gap-3">
-            <dt class="text-sm font-medium text-ink-800 w-24 shrink-0">Video</dt>
-            <dd class="text-sm text-ink-500">Creating YouTube content — stories, ideas, and conversations.</dd>
+            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Video</dt>
+            <dd class="text-sm text-stone-500">Creating YouTube content — stories, ideas, and conversations.</dd>
           </div>
           <div class="flex gap-3">
-            <dt class="text-sm font-medium text-ink-800 w-24 shrink-0">Teaching</dt>
-            <dd class="text-sm text-ink-500">University lectures and online courses for curious minds.</dd>
+            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Teaching</dt>
+            <dd class="text-sm text-stone-500">University lectures and online courses for curious minds.</dd>
           </div>
           <div class="flex gap-3">
-            <dt class="text-sm font-medium text-ink-800 w-24 shrink-0">Writing</dt>
-            <dd class="text-sm text-ink-500">Published books and the occasional blog post.</dd>
+            <dt class="text-sm font-medium text-stone-800 w-24 shrink-0">Writing</dt>
+            <dd class="text-sm text-stone-500">Published books and the occasional blog post.</dd>
           </div>
         </dl>
       </div>
 
       <% if @settings.youtube_url.present? || @settings.twitter_url.present? || @settings.instagram_url.present? || @settings.linkedin_url.present? %>
-        <div class="border-t border-ink-100 mt-8 pt-8">
-          <h2 class="text-sm font-semibold text-ink-400 uppercase tracking-widest mb-4">Elsewhere</h2>
+        <div class="border-t border-stone-100 mt-8 pt-8">
+          <h2 class="text-sm font-semibold text-stone-400 uppercase tracking-widest mb-4">Elsewhere</h2>
           <div class="flex gap-4">
             <% { youtube_url: "YouTube", twitter_url: "X/Twitter", instagram_url: "Instagram", linkedin_url: "LinkedIn" }.each do |method, label| %>
               <% if @settings.send(method).present? %>
-                <%= link_to label, @settings.send(method), target: "_blank", rel: "noopener", class: "text-sm text-ink-500 hover:text-ink-800 transition-colors" %>
+                <%= link_to label, @settings.send(method), target: "_blank", rel: "noopener", class: "text-sm text-stone-500 hover:text-stone-800 transition-colors" %>
               <% end %>
             <% end %>
           </div>
         </div>
       <% end %>
 
-      <div class="mt-8 pt-8 border-t border-ink-100">
-        <%= link_to "Get in touch &rarr;".html_safe, contact_path, class: "text-sm font-medium text-ink-800 hover:text-accent transition-colors" %>
+      <div class="mt-8 pt-8 border-t border-stone-100">
+        <%= link_to "Get in touch &rarr;".html_safe, contact_path, class: "text-sm font-medium text-stone-800 hover:text-stone-600 transition-colors" %>
       </div>
     </div>
   </div>
