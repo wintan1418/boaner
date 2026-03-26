@@ -1,4 +1,6 @@
 <% content_for(:title) { "#{@course.title} — Boaner" } %>
+<% content_for(:meta_title) { "#{@course.title} — Boaner" } %>
+<% content_for(:meta_description) { @course.description.to_s.truncate(160) } %>
 
 <section class="max-w-4xl mx-auto px-6 sm:px-8 py-10 md:py-14">
   <!-- Breadcrumb -->

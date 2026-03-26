@@ -10,12 +10,24 @@
       <% end %>
 
       <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center gap-1">
+      <nav class="hidden md:flex items-center gap-1" data-controller="search">
         <%= nav_link "Videos", videos_path %>
         <%= nav_link "Blog", posts_path %>
         <%= nav_link "Courses", courses_path %>
         <%= nav_link "Books", books_path %>
         <%= nav_link "About", about_path %>
+        <%= link_to reading_list_path, class: "p-2 text-gray-400 hover:text-amber-500 transition-colors", title: "Reading List" do %>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/></svg>
+        <% end %>
+
+        <!-- Search -->
+        <button data-action="click->search#toggle" class="p-2 text-gray-400 hover:text-amber-600 transition-colors" aria-label="Search">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </button>
+        <form data-search-target="form" data-action="submit->search#submit" class="hidden items-center">
+          <input data-search-target="input" type="text" name="q" placeholder="Search..." class="w-40 px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition">
+        </form>
+
         <%= link_to "Contact", contact_path, class: "ml-3 px-5 py-2 text-sm font-semibold rounded-lg transition-all duration-300 #{current_page?(contact_path) ? 'btn-amber text-white' : 'btn-amber text-white'}" %>
       </nav>
 

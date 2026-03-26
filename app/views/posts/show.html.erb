@@ -1,4 +1,6 @@
 <% content_for(:title) { "#{@post.title} — Boaner" } %>
+<% content_for(:meta_title) { "#{@post.title} — Boaner" } %>
+<% content_for(:meta_description) { @post.excerpt.to_s.truncate(160) } %>
 
 <article class="max-w-2xl mx-auto px-6 sm:px-8 py-10 md:py-14">
   <!-- Breadcrumb -->
@@ -19,12 +21,31 @@
       <span class="text-gray-400"><%= @post.reading_time %></span>
     </div>
     <h1 class="text-3xl md:text-4xl font-bold text-gray-900 leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @post.title %></h1>
+    <button data-controller="bookmark"
+            data-bookmark-id-value="<%= @post.slug %>"
+            data-bookmark-type-value="post"
+            data-bookmark-title-value="<%= @post.title %>"
+            data-action="click->bookmark#toggle"
+            class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-amber-500 transition-colors mt-3">
+      <svg data-bookmark-target="icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+      </svg>
+      <span>Save for later</span>
+    </button>
     <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-5"></div>
   </header>
 
   <div class="prose-content text-gray-700">
     <%= @post.body %>
   </div>
+
+  <!-- Share Buttons -->
+  <div class="border-t border-gray-100 mt-8 pt-6">
+    <%= render "shared/share_buttons", title: @post.title, url: post_url(@post) %>
+  </div>
+
+  <!-- Related Posts -->
+  <%= render "shared/related_posts", posts: @post.related_posts %>
 
   <!-- Comments -->
   <div class="border-t border-gray-200 mt-14 pt-10">

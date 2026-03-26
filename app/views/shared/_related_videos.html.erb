@@ -1,0 +1,10 @@
+<% if videos.any? %>
+  <div class="border-t border-gray-100 mt-12 pt-10">
+    <h2 class="text-xl font-bold text-gray-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">You might also like</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <% videos.each do |video| %>
+        <%= render "videos/card", video: video %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

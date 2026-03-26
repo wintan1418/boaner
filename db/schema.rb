@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_26_230116) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_26_231531) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -129,6 +129,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_26_230116) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "series", force: :cascade do |t|
+    t.string "title"
+    t.string "slug"
+    t.text "description"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "site_settings", force: :cascade do |t|
     t.string "site_name"
     t.string "tagline"
@@ -165,9 +174,12 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_26_230116) do
     t.boolean "featured"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "series_id"
+    t.index ["series_id"], name: "index_videos_on_series_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "videos", "series"
 end

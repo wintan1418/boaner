@@ -21,6 +21,10 @@ class Post < ApplicationRecord
     "#{minutes} min read"
   end
 
+  def related_posts(limit = 3)
+    Post.published.where(category: category).where.not(id: id).limit(limit)
+  end
+
   private
 
   def generate_slug

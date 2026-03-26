@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :books
     resources :comments, only: [ :index, :update, :destroy ]
     resources :subscribers, only: [ :index, :destroy ]
+    resources :series
     resource :settings, only: [ :edit, :update ] do
       post :sync_youtube, on: :member
     end
@@ -32,9 +33,14 @@ Rails.application.routes.draw do
     resources :lessons, only: :show
   end
 
+  resources :series, only: [:index, :show]
   resources :books, only: :index
   resources :subscribers, only: :create
 
+  get "search", to: "search#index"
+  get "feed", to: "feeds#index", defaults: { format: :rss }
+
+  get "reading-list", to: "pages#reading_list"
   get "about", to: "pages#about"
   get "contact", to: "pages#contact"
   post "contact", to: "pages#send_message"

@@ -17,3 +17,12 @@ application.register("animate", AnimateController)
 
 import SliderController from "./slider_controller"
 application.register("slider", SliderController)
+
+import BookmarkController from "./bookmark_controller"
+application.register("bookmark", BookmarkController)
+
+import ReadingListController from "./reading_list_controller"
+application.register("reading-list", ReadingListController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)

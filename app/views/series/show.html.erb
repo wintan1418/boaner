@@ -1,0 +1,43 @@
+<% content_for(:title) { "#{@series_record.title} — Boaner" } %>
+
+<section class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12 py-10 md:py-14">
+  <!-- Breadcrumb -->
+  <div class="mb-6 flex items-center gap-2 text-sm">
+    <%= link_to "Series", series_index_path, class: "text-amber-600 hover:text-amber-700 font-medium transition-colors" %>
+    <svg class="w-4 h-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </div>
+
+  <!-- Series Header -->
+  <div class="bg-gradient-to-br from-gray-900 to-gray-950 rounded-2xl p-8 md:p-10 mb-10">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+      </div>
+      <span class="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold rounded-md"><%= @videos.count %> video<%= @videos.count == 1 ? '' : 's' %></span>
+    </div>
+    <h1 class="text-2xl md:text-3xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @series_record.title %></h1>
+    <% if @series_record.description.present? %>
+      <p class="mt-3 text-gray-400 leading-relaxed max-w-2xl"><%= @series_record.description %></p>
+    <% end %>
+  </div>
+
+  <!-- Videos List -->
+  <h2 class="text-lg font-bold text-gray-900 mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">Videos</h2>
+  <div class="space-y-4">
+    <% @videos.each_with_index do |video, i| %>
+      <%= link_to video_path(video), class: "group flex items-center gap-5 p-4 bg-white rounded-xl border border-gray-100 hover:border-amber-200 hover:shadow-md transition-all duration-300" do %>
+        <span class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm"><%= i + 1 %></span>
+        <div class="w-28 aspect-video rounded-lg overflow-hidden bg-gray-100 shrink-0 hidden sm:block">
+          <img src="<%= video.thumbnail_url_hq %>" alt="" class="w-full h-full object-cover" loading="lazy">
+        </div>
+        <div class="flex-1 min-w-0">
+          <span class="text-sm font-semibold text-gray-900 group-hover:text-amber-600 transition-colors line-clamp-1"><%= video.title %></span>
+          <% if video.published_at %>
+            <p class="text-xs text-gray-400 mt-0.5"><%= video.published_at.strftime("%B %d, %Y") %></p>
+          <% end %>
+        </div>
+        <svg class="w-5 h-5 text-gray-300 group-hover:text-amber-500 transform group-hover:translate-x-1 transition-all shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <% end %>
+    <% end %>
+  </div>
+</section>

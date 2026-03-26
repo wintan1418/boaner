@@ -1,4 +1,7 @@
 <% content_for(:title) { "#{@video.title} — Boaner" } %>
+<% content_for(:meta_title) { "#{@video.title} — Boaner" } %>
+<% content_for(:meta_description) { @video.description.to_s.truncate(160) } %>
+<% content_for(:meta_image) { @video.thumbnail_url } %>
 
 <section class="max-w-3xl mx-auto px-6 sm:px-8 py-10 md:py-14">
   <!-- Breadcrumb -->
@@ -28,6 +31,17 @@
       <span class="inline-block px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-md uppercase tracking-wide mb-3"><%= @video.category %></span>
     <% end %>
     <h1 class="text-2xl md:text-3xl font-bold text-gray-900" style="font-family: 'Source Serif 4', Georgia, serif;"><%= @video.title %></h1>
+    <button data-controller="bookmark"
+            data-bookmark-id-value="<%= @video.id %>"
+            data-bookmark-type-value="video"
+            data-bookmark-title-value="<%= @video.title %>"
+            data-action="click->bookmark#toggle"
+            class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-amber-500 transition-colors mt-3">
+      <svg data-bookmark-target="icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"/>
+      </svg>
+      <span>Save for later</span>
+    </button>
     <% if @video.published_at %>
       <p class="mt-2 text-sm text-gray-400"><%= @video.published_at.strftime("%B %d, %Y") %></p>
     <% end %>
@@ -37,6 +51,14 @@
       </div>
     <% end %>
   </div>
+
+  <!-- Share Buttons -->
+  <div class="border-t border-gray-100 mt-8 pt-6">
+    <%= render "shared/share_buttons", title: @video.title, url: video_url(@video) %>
+  </div>
+
+  <!-- Related Videos -->
+  <%= render "shared/related_videos", videos: @video.related_videos %>
 
   <!-- Comments -->
   <div class="border-t border-gray-200 mt-10 pt-10">

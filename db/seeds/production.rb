@@ -32,6 +32,10 @@ videos_data = [
   { youtube_id: "8DJhYMmwIQI", title: "Roman Empire's Dark Secret | How Brutal Slavery & Exploitation Forged Its Golden Age", description: "The Roman Empire: a beacon of engineering, law, and culture. But what if we told you that behind every magnificent structure lay an ocean of human suffering?", category: "History", published_at: 2.months.ago, featured: false },
   { youtube_id: "Y7kOpjBKGI0", title: "Why Napoleon Lost to an Army of Slaves", description: "Napoleon betrayed them. So they destroyed his army. The brutal end of the Haitian Revolution.", category: "History", published_at: 2.months.ago, featured: false },
   { youtube_id: "E-hXKJhHPtQ", title: "The Revolutionary Ego: Mugabe, Amin & Gaddafi's Rule of Fear", description: "They started as liberators. They ended as tyrants. Exploring the psychology of powerful African leaders.", category: "History", published_at: 3.months.ago, featured: false },
+  { youtube_id: "roN-9liq3u0", title: "The Narcissistic Rulers Who Destroyed Nations (Part 2)", description: "From Nero to Idi Amin — the pattern of narcissistic leadership and its devastating consequences.", category: "History", published_at: 3.months.ago, featured: false },
+  { youtube_id: "HyKAX22nRok", title: "When Ego Rules: The Psychology of Tyrannical Power (Part 3)", description: "Understanding the psychological profile of leaders who put ego above everything.", category: "History", published_at: 3.months.ago, featured: false },
+  { youtube_id: "mfjU_8oPwSI", title: "Narcissistic Rulers: The Fall of Empires (Part 4)", description: "How narcissistic leadership led to the collapse of some of history's greatest civilizations.", category: "History", published_at: 4.months.ago, featured: false },
+  { youtube_id: "MetrlGclPJQ", title: "Narcissistic Rulers: Lessons History Teaches Us (Part 5)", description: "What can we learn from the patterns of narcissistic rulers throughout history?", category: "History", published_at: 4.months.ago, featured: false },
 ]
 
 videos_data.each do |v|
@@ -40,6 +44,28 @@ videos_data.each do |v|
   video.save!
 end
 puts "  #{Video.count} videos"
+
+# Series
+series_data = [
+  { title: "American Revolution", slug: "american-revolution", description: "A three-part deep dive into the birth of the United States.", position: 1,
+    video_ids: %w[IWGZkqBAY-4 90CjNlwJl5A RJJcutxwwLE] },
+  { title: "Industrial Revolution", slug: "industrial-revolution", description: "Exploring how the Industrial Revolution transformed the world.", position: 2,
+    video_ids: %w[4mPB70e13LA 711UoCNBX7Q] },
+  { title: "Narcissistic Rulers", slug: "narcissistic-rulers", description: "A multi-part series on history's most dangerous egos and what drives narcissistic leaders.", position: 3,
+    video_ids: %w[E-hXKJhHPtQ roN-9liq3u0 HyKAX22nRok mfjU_8oPwSI MetrlGclPJQ y84JXjTCa-M] },
+]
+
+series_data.each do |s|
+  yt_ids = s.delete(:video_ids)
+  series = Series.find_or_initialize_by(slug: s[:slug])
+  series.assign_attributes(s)
+  series.save!
+  yt_ids.each do |yt_id|
+    video = Video.find_by(youtube_id: yt_id)
+    video&.update!(series_id: series.id)
+  end
+end
+puts "  #{Series.count} series"
 
 # Blog Posts
 posts_data = [

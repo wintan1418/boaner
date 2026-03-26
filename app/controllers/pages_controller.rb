@@ -2,6 +2,9 @@ class PagesController < ApplicationController
   def about
   end
 
+  def reading_list
+  end
+
   def contact
   end
 
