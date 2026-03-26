@@ -14,3 +14,6 @@ application.register("form-validation", FormValidationController)
 
 import AnimateController from "./animate_controller"
 application.register("animate", AnimateController)
+
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)

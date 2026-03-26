@@ -1,13 +1,25 @@
+<%
+  # Placeholder cover images for books without uploaded covers
+  placeholder_covers = [
+    "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=600&q=80&auto=format&fit=crop",
+  ]
+  cover_index = defined?(book_counter) ? book_counter.to_i % 3 : book.id.to_i % 3
+%>
+
 <div class="group card-hover">
-  <div class="aspect-[3/4] rounded-xl overflow-hidden mb-5 ring-1 ring-white/10">
+  <div class="aspect-[2/3] rounded-xl overflow-hidden mb-5 shadow-lg ring-1 ring-white/10 relative">
     <% if book.cover.attached? %>
       <%= image_tag book.cover, class: "w-full h-full object-cover thumbnail-zoom", alt: book.title %>
     <% else %>
-      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-500 to-orange-600 p-8">
-        <div class="text-center">
-          <svg class="w-10 h-10 text-white/40 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          <p class="text-white font-bold text-lg leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= book.title %></p>
-        </div>
+      <img src="<%= placeholder_covers[cover_index] %>"
+           alt="<%= book.title %>"
+           class="w-full h-full object-cover thumbnail-zoom"
+           loading="lazy">
+      <!-- Title overlay on placeholder -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-5">
+        <p class="text-white font-bold text-lg leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= book.title %></p>
       </div>
     <% end %>
   </div>

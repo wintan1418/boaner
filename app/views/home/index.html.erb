@@ -1,12 +1,31 @@
 <% content_for(:title) { "Boaner — #{@settings.tagline}" } %>
 
-<!-- Hero Section -->
-<section class="relative min-h-[90vh] flex items-center overflow-hidden">
-  <!-- Background Image -->
+<!-- Hero Section with Image Slider -->
+<section class="relative min-h-[90vh] flex items-center overflow-hidden" data-controller="slider" data-slider-interval-value="6000">
+  <!-- Sliding Background Images -->
   <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1920&q=80&auto=format&fit=crop"
-         alt="" class="w-full h-full object-cover" loading="eager">
-    <div class="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/80 to-gray-950/60"></div>
+    <div data-slider-target="slide" class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+      <img src="https://images.unsplash.com/photo-1473163928189-364b2c4e1135?w=1920&q=80&auto=format&fit=crop"
+           alt="Ink and feather" class="w-full h-full object-cover">
+    </div>
+    <div data-slider-target="slide" class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+      <img src="https://images.unsplash.com/photo-1590845947676-fa1fda7810e6?w=1920&q=80&auto=format&fit=crop"
+           alt="African art and culture" class="w-full h-full object-cover">
+    </div>
+    <div data-slider-target="slide" class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+      <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1920&q=80&auto=format&fit=crop"
+           alt="Books and stories" class="w-full h-full object-cover">
+    </div>
+    <div data-slider-target="slide" class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+      <img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=1920&q=80&auto=format&fit=crop"
+           alt="Vintage writing desk" class="w-full h-full object-cover">
+    </div>
+    <div data-slider-target="slide" class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+      <img src="https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1920&q=80&auto=format&fit=crop"
+           alt="African history" class="w-full h-full object-cover">
+    </div>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-gray-950/95 via-gray-950/85 to-gray-950/60"></div>
   </div>
 
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28 w-full">
@@ -42,10 +61,21 @@
     </div>
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 animate-bounce">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+  <!-- Slider dots -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2">
+    <% 5.times do |i| %>
+      <button data-slider-target="dot" data-index="<%= i %>" data-action="click->slider#goTo"
+              class="h-2.5 rounded-full transition-all duration-300 <%= i == 0 ? 'bg-amber-500 w-8' : 'bg-white/40 w-2.5' %> hover:bg-amber-400"></button>
+    <% end %>
   </div>
+
+  <!-- Slider arrows -->
+  <button data-action="click->slider#prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white/70 hover:text-white hover:bg-black/50 flex items-center justify-center transition-all hidden md:flex">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button data-action="click->slider#next" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white/70 hover:text-white hover:bg-black/50 flex items-center justify-center transition-all hidden md:flex">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
 </section>
 
 <!-- Stats Strip -->
@@ -133,7 +163,7 @@
   </div>
 </section>
 
-<!-- Books Section (Dark with background image) -->
+<!-- Books Section -->
 <% if @books.any? %>
   <section class="relative py-20 md:py-24 overflow-hidden">
     <div class="absolute inset-0">
@@ -165,7 +195,7 @@
 <!-- Newsletter/CTA Section -->
 <section class="relative overflow-hidden">
   <div class="absolute inset-0">
-    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=80&auto=format&fit=crop"
+    <img src="https://images.unsplash.com/photo-1576485290814-1c72aa4bbb8e?w=1920&q=80&auto=format&fit=crop"
          alt="" class="w-full h-full object-cover">
     <div class="absolute inset-0 bg-gradient-to-br from-amber-600/95 via-amber-500/90 to-orange-500/95"></div>
   </div>
