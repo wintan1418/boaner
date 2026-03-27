@@ -1,9 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Simple scroll-reveal. No fancy stuff.
 export default class extends Controller {
   connect() {
-    this.element.classList.add("fade-in")
+    // Support both fade-in and reveal-section
+    if (!this.element.classList.contains("reveal-section")) {
+      this.element.classList.add("fade-in")
+    }
 
     this.observer = new IntersectionObserver(
       (entries) => {

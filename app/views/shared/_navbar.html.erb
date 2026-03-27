@@ -1,12 +1,9 @@
-<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-shadow duration-300" data-controller="navbar">
+<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 transition-all duration-300" data-controller="navbar">
   <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="flex items-center justify-between h-16">
+    <div class="flex items-center justify-between h-16 transition-all duration-300">
       <!-- Logo -->
-      <%= link_to root_path, class: "flex items-center gap-2.5 shrink-0 group" do %>
-        <span class="w-9 h-9 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center shadow-md shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow">
-          <span class="text-white font-bold text-sm" style="font-family: 'Source Serif 4', Georgia, serif;">B</span>
-        </span>
-        <span class="text-[1.2rem] font-bold text-gray-900 tracking-tight" style="font-family: 'Source Serif 4', Georgia, serif;">Boaner</span>
+      <%= link_to root_path, class: "flex items-center shrink-0 group" do %>
+        <%= render "shared/logo", size: "sm" %>
       <% end %>
 
       <!-- Desktop Nav -->
@@ -44,7 +41,7 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div data-navbar-target="menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100">
+  <div data-navbar-target="menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 overflow-hidden">
     <div class="px-4 py-4 space-y-1">
       <%= mobile_nav_link "Videos", videos_path %>
       <%= mobile_nav_link "Blog", posts_path %>
