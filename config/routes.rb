@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
+    get "forgot-password", to: "passwords#new"
+    post "forgot-password", to: "passwords#create"
+    get "reset-password", to: "passwords#edit"
+    patch "reset-password", to: "passwords#update"
     resources :videos
     resources :posts
     resources :courses do
