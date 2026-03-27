@@ -138,10 +138,10 @@ end
 puts "  #{Book.count} books"
 
 # Admin user
-AdminUser.find_or_create_by!(email: "comungback2dfuture@gmail.com") do |admin|
+AdminUser.find_or_create_by!(email: "comingback2dfuture@gmail.com") do |admin|
   admin.password = "Boaner2026!"
   admin.password_confirmation = "Boaner2026!"
 end
-puts "  Admin user created (comungback2dfuture@gmail.com)"
+puts "  Admin user created (comingback2dfuture@gmail.com)"
 
 puts "Done!"
