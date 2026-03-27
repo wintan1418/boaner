@@ -73,7 +73,12 @@
 
     <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p class="text-xs text-gray-500">&copy; <%= Date.current.year %> Boaner. All rights reserved.</p>
-      <p class="text-xs text-gray-600">Crafted with care.</p>
+      <p class="text-xs text-gray-600">
+        Developed by
+        <%= link_to "https://oluwintan.com", target: "_blank", rel: "noopener", class: "text-amber-500 hover:text-amber-400 font-semibold transition-colors" do %>
+          Wintech
+        <% end %>
+      </p>
     </div>
   </div>
 </footer>
