@@ -9,13 +9,15 @@ class PagesController < ApplicationController
   end
 
   def send_message
-    @name = params[:name]
-    @email = params[:email]
-    @subject = params[:subject]
-    @message = params[:message]
+    @contact = ContactMessage.new(
+      name: params[:name],
+      email: params[:email],
+      subject: params[:subject],
+      message: params[:message]
+    )
 
-    if @name.present? && @email.present? && @message.present?
-      ContactMailer.inquiry(@name, @email, @subject, @message).deliver_later
+    if @contact.save
+      ContactMailer.inquiry(@contact.name, @contact.email, @contact.subject, @contact.message).deliver_later
       respond_to do |format|
         format.turbo_stream
         format.html { redirect_to contact_path, notice: "Message sent successfully!" }

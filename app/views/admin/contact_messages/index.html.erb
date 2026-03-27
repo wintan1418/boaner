@@ -1,0 +1,46 @@
+<% content_for(:title, "Messages — Boaner Admin") %>
+
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">Messages</h1>
+    <p class="text-gray-500 text-sm mt-1">
+      <%= @unread_count > 0 ? "#{@unread_count} unread" : "All caught up" %>
+    </p>
+  </div>
+</div>
+
+<% if @messages.any? %>
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 divide-y divide-gray-100">
+    <% @messages.each do |msg| %>
+      <%= link_to admin_contact_message_path(msg), class: "block p-5 hover:bg-gray-50 transition-colors #{msg.read? ? '' : 'bg-amber-50/50'}" do %>
+        <div class="flex items-start justify-between gap-4">
+          <div class="flex items-start gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br <%= msg.read? ? 'from-gray-300 to-gray-400' : 'from-amber-500 to-orange-500' %> flex items-center justify-center shrink-0">
+              <span class="text-white text-sm font-bold"><%= msg.name.first.upcase %></span>
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-gray-900 text-sm <%= msg.read? ? '' : 'text-amber-900' %>"><%= msg.name %></span>
+                <% unless msg.read? %>
+                  <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <% end %>
+              </div>
+              <p class="text-sm text-gray-500 truncate"><%= msg.subject.present? ? msg.subject : "No subject" %> — <%= msg.message.truncate(80) %></p>
+              <p class="text-xs text-gray-400 mt-1"><%= msg.email %> &middot; <%= time_ago_in_words(msg.created_at) %> ago</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <%= button_to admin_contact_message_path(msg), method: :delete, class: "p-1.5 text-gray-300 hover:text-red-500 transition-colors", data: { turbo_confirm: "Delete this message?" } do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center py-16 bg-white rounded-xl border border-gray-200">
+    <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+    <p class="text-gray-400 font-medium">No messages yet.</p>
+  </div>
+<% end %>

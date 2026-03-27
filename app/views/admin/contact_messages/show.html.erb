@@ -1,0 +1,46 @@
+<% content_for(:title, "Message from #{@message.name} — Boaner Admin") %>
+
+<div class="mb-6">
+  <%= link_to "&larr; All messages".html_safe, admin_contact_messages_path, class: "text-sm text-amber-600 hover:text-amber-700 font-medium" %>
+</div>
+
+<div class="max-w-2xl">
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <!-- Header -->
+    <div class="px-6 py-5 border-b border-gray-100 bg-gray-50">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+          <span class="text-white font-bold"><%= @message.name.first.upcase %></span>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-gray-900"><%= @message.name %></h1>
+          <p class="text-sm text-gray-500"><%= @message.email %></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meta -->
+    <div class="px-6 py-3 border-b border-gray-100 flex items-center gap-4 text-sm text-gray-500">
+      <span><strong class="text-gray-700">Subject:</strong> <%= @message.subject.presence || "General" %></span>
+      <span>&middot;</span>
+      <span><%= @message.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+    </div>
+
+    <!-- Body -->
+    <div class="px-6 py-6">
+      <div class="text-gray-700 leading-relaxed whitespace-pre-wrap"><%= @message.message %></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex items-center gap-3">
+      <%= link_to "mailto:#{@message.email}?subject=Re: #{@message.subject}", class: "inline-flex items-center gap-2 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors" do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10l9 6 9-6M3 10v8a2 2 0 002 2h14a2 2 0 002-2v-8"/></svg>
+        Reply via Email
+      <% end %>
+      <%= button_to admin_contact_message_path(@message), method: :delete, class: "inline-flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 text-sm font-semibold rounded-lg transition-colors", data: { turbo_confirm: "Delete this message?" } do %>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+        Delete
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  body: MyText
+  sent_at: 2026-03-27 12:21:20
+  recipients_count: 1
+
+two:
+  subject: MyString
+  body: MyText
+  sent_at: 2026-03-27 12:21:20
+  recipients_count: 1

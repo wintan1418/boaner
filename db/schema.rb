@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_27_111523) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_27_112120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -99,6 +99,16 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_111523) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
+  create_table "contact_messages", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "subject"
+    t.text "message"
+    t.boolean "read"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -116,6 +126,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_111523) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
+
+  create_table "newsletters", force: :cascade do |t|
+    t.string "subject"
+    t.text "body"
+    t.datetime "sent_at"
+    t.integer "recipients_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|

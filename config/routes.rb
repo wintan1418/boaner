@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     resources :books
     resources :comments, only: [ :index, :update, :destroy ]
     resources :subscribers, only: [ :index, :destroy ]
+    resources :contact_messages, only: [ :index, :show, :destroy ]
+    resources :newsletters, except: [ :show ] do
+      post :send_newsletter, on: :member
+    end
     resources :series
     resource :settings, only: [ :edit, :update ] do
       post :sync_youtube, on: :member
