@@ -144,4 +144,27 @@ AdminUser.find_or_create_by!(email: "comingback2dfuture@gmail.com") do |admin|
 end
 puts "  Admin user created (comingback2dfuture@gmail.com)"
 
+# Newsletter drafts (templates to get started)
+newsletters = [
+  {
+    subject: "Welcome to Boaner — Here's What's Coming",
+    body: "<h2>Welcome!</h2><p>Thank you for subscribing to the Boaner newsletter. I'm thrilled to have you here.</p><p>Here's what you can expect:</p><ul><li><strong>New video alerts</strong> — be the first to know when a new episode drops</li><li><strong>Behind the scenes</strong> — the stories behind the stories</li><li><strong>Book updates</strong> — new releases, signings, and exclusive previews</li></ul><p>In the meantime, check out my latest video on the channel and let me know what you think.</p><p>Stay curious,<br>Boaner</p>"
+  },
+  {
+    subject: "New Video Alert: [Video Title Here]",
+    body: "<h2>New Video Just Dropped</h2><p>I just published a new video that I think you're going to love:</p><p><strong>[Paste your video title here]</strong></p><p>[Write 2-3 sentences about what the video covers and why it matters]</p><p>Watch it here: [paste link]</p><p>If you enjoy it, please like, share, and subscribe — it helps more than you know.</p><p>Until next time,<br>Boaner</p>"
+  },
+  {
+    subject: "Announcing My New Book: [Book Title]",
+    body: "<h2>It's Finally Here</h2><p>After months of writing, researching, and revising — I'm proud to announce my new book:</p><p><strong>[Book Title]</strong></p><p>[Write a paragraph about what the book is about and why you wrote it]</p><p>You can grab your copy here: [paste buy link]</p><p>Thank you for being part of this journey. Your support means the world.</p><p>With gratitude,<br>Boaner</p>"
+  }
+]
+
+newsletters.each do |n|
+  nl = Newsletter.find_or_initialize_by(subject: n[:subject])
+  nl.save! if nl.new_record?
+  nl.update!(body: n[:body]) unless nl.body.present?
+end
+puts "  #{Newsletter.count} newsletter templates"
+
 puts "Done!"

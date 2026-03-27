@@ -1,0 +1,230 @@
+<% content_for(:title, "Site Guide — Boaner Admin") %>
+
+<div class="max-w-3xl">
+  <div class="mb-10">
+    <h1 class="text-2xl font-bold text-gray-900">Welcome to Your Site</h1>
+    <p class="text-gray-500 mt-1">Everything you need to know about managing boaner.com</p>
+  </div>
+
+  <!-- Quick Start -->
+  <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200 p-8 mb-10">
+    <h2 class="text-xl font-bold text-gray-900 mb-4" style="font-family: 'Source Serif 4', Georgia, serif;">Quick Start Checklist</h2>
+    <div class="space-y-3">
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500">
+        <span class="text-sm text-gray-700"><strong>Upload your profile photo</strong> — Go to Settings > Branding</span>
+      </label>
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500">
+        <span class="text-sm text-gray-700"><strong>Update your bio</strong> — Settings > Bio (short + long versions)</span>
+      </label>
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500">
+        <span class="text-sm text-gray-700"><strong>Add your social links</strong> — Settings > Social (YouTube, X, Instagram, LinkedIn)</span>
+      </label>
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500">
+        <span class="text-sm text-gray-700"><strong>Connect YouTube auto-sync</strong> — Settings > YouTube Auto-Sync (add API key + channel ID)</span>
+      </label>
+      <label class="flex items-start gap-3 cursor-pointer">
+        <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500">
+        <span class="text-sm text-gray-700"><strong>Change your password</strong> — Use "Forgot password" on the login page</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Sections -->
+  <div class="space-y-8">
+
+    <!-- VIDEOS -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+          Videos
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p><strong>No video files are stored on your server.</strong> Videos are embedded from YouTube. You only store the video ID (11 characters), title, and description. Thumbnails load directly from YouTube's CDN.</p>
+        <p><strong>Adding a video manually:</strong> Go to Videos > New Video. Paste the YouTube video ID (the part after <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">v=</code> in the URL, e.g. <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">UoHES8e4Ri8</code>). Add title, description, pick a category, set the publish date. Check "Featured" to show it on the homepage.</p>
+        <p><strong>YouTube Auto-Sync:</strong> Connect your channel in Settings and new videos import automatically every 6 hours. You can also hit "Sync Now" anytime.</p>
+        <p><strong>Series:</strong> Group related videos into series (e.g. "American Revolution Part 1-3"). Create a series, then assign videos to it from the video edit page.</p>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+          Blog Posts
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p><strong>Write posts</strong> using the rich text editor — format text, add headings, links, images, block quotes. Posts support categories (Essay, History, Opinion, Story) for filtering on the site.</p>
+        <p><strong>The slug</strong> is the URL-friendly version of the title (auto-generated). E.g. "The Black Pharaohs" becomes <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">the-black-pharaohs</code>.</p>
+        <p><strong>Excerpt</strong> is the short preview shown on the blog listing and homepage. Keep it 1-2 sentences.</p>
+        <p><strong>Featured posts</strong> appear on the homepage. Set the publish date to control when they go live.</p>
+        <p><strong>RSS Feed:</strong> Your blog has an automatic RSS feed at <code class="bg-gray-100 px-1.5 py-0.5 rounded text-xs">boaner.com/feed.rss</code> — readers can subscribe in any feed reader.</p>
+      </div>
+    </div>
+
+    <!-- COURSES -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          Courses
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p><strong>Create a course</strong> with a title, description, and slug. Then add lessons inside it.</p>
+        <p><strong>Lessons</strong> are ordered by position number. Each lesson has a rich text body (same editor as blog posts). Mark lessons as "Free Preview" to let visitors read them without restrictions.</p>
+        <p><strong>Toggle published</strong> to show/hide courses on the public site.</p>
+      </div>
+    </div>
+
+    <!-- BOOKS -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.65 1 5.5v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.05 5.05 19.5 6.5 19.5c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg>
+          Books
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p><strong>Add your books</strong> with title, description, year, and a buy link (Amazon, etc.).</p>
+        <p><strong>Upload a cover image</strong> for each book. If you don't upload one, a placeholder image is shown automatically. Keep cover images under 200KB for fast loading.</p>
+        <p>The "Buy Now" button links directly to wherever you sell the book.</p>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Messages (Contact Inbox)
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p>Every message sent through the Contact page on your site is <strong>saved here AND emailed to you</strong>. You'll never miss a message.</p>
+        <p>Unread messages show a count badge in the sidebar. Click a message to read it and it's marked as read.</p>
+        <p>Use the <strong>"Reply via Email"</strong> button to respond directly from your email client.</p>
+      </div>
+    </div>
+
+    <!-- NEWSLETTERS -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+          Newsletters
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p><strong>Send newsletters to all your subscribers</strong> directly from the admin panel. No need for Mailchimp or any third-party service.</p>
+        <p><strong>How it works:</strong></p>
+        <ol class="list-decimal ml-5 space-y-1">
+          <li>Click "Compose" to write a new newsletter</li>
+          <li>Write your subject line and content using the rich text editor</li>
+          <li>Click "Save Draft" — you can come back and edit later</li>
+          <li>When ready, click the "Send" button on the draft</li>
+          <li>Confirm — the newsletter is sent to all subscribers</li>
+        </ol>
+        <p>Emails are sent with your Boaner branding. Once sent, newsletters can't be edited (but can be deleted).</p>
+        <p><strong>Subscribers</strong> sign up through the newsletter form on your site. You can see all subscribers and remove any from the Subscribers section.</p>
+      </div>
+    </div>
+
+    <!-- COMMENTS -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          Comments
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p>Visitors can comment on videos and blog posts. <strong>All comments require your approval</strong> before they appear on the site — no spam gets through.</p>
+        <p>Go to Comments to see pending comments. Click "Approve" to make them public, or delete unwanted ones.</p>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          Settings
+        </h2>
+      </div>
+      <div class="px-6 py-5 text-sm text-gray-600 space-y-3">
+        <p>Customise everything about your site from one place:</p>
+        <ul class="list-disc ml-5 space-y-1">
+          <li><strong>Branding:</strong> Site name, tagline, profile photo</li>
+          <li><strong>Hero Section:</strong> The main heading and description on your homepage</li>
+          <li><strong>Bio:</strong> Short bio (shown in cards/footer) and long bio (About page)</li>
+          <li><strong>Social Links:</strong> YouTube, X/Twitter, Instagram, LinkedIn URLs</li>
+          <li><strong>Contact Email:</strong> Where contact form messages are sent</li>
+          <li><strong>YouTube Auto-Sync:</strong> Channel ID + API key to auto-import videos</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HOW THIS SITE BENEFITS YOU -->
+    <div class="bg-gray-900 rounded-2xl p-8 text-white mt-12">
+      <h2 class="text-xl font-bold mb-6" style="font-family: 'Source Serif 4', Georgia, serif;">How This Site Benefits You</h2>
+      <div class="space-y-5 text-sm text-gray-300">
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">01</span>
+          <div>
+            <p class="text-white font-semibold mb-1">Your Own Platform</p>
+            <p>You own this. Unlike YouTube or social media where algorithms decide who sees your content, your website is yours. No algorithm can shadow-ban you, demonetize you, or reduce your reach. Every subscriber, every reader — they come directly to you.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">02</span>
+          <div>
+            <p class="text-white font-semibold mb-1">Build Your Email List</p>
+            <p>Your subscriber list is the most valuable asset you can build as a creator. Social media followers can vanish overnight. Email subscribers are yours forever. Send newsletters, announce new videos, promote books — directly to people who already care about your work.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">03</span>
+          <div>
+            <p class="text-white font-semibold mb-1">Sell Books & Courses</p>
+            <p>Every book has a "Buy Now" button linking to Amazon or wherever you sell. Courses can have free preview lessons to hook people in. Your website is a 24/7 sales machine working for you while you sleep.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">04</span>
+          <div>
+            <p class="text-white font-semibold mb-1">Get Speaking Gigs</p>
+            <p>The Contact page makes it easy for event organisers, universities, and conferences to reach you. Every message lands in your inbox here AND in your email. You look professional. You look established.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">05</span>
+          <div>
+            <p class="text-white font-semibold mb-1">SEO & Social Sharing</p>
+            <p>Every page has Open Graph and Twitter Card meta tags. When someone shares your content on social media, it shows up with a rich preview — your title, description, and thumbnail. Google can find and index all your content. Your blog has an RSS feed for syndication.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <span class="text-amber-500 text-lg font-bold shrink-0">06</span>
+          <div>
+            <p class="text-white font-semibold mb-1">Zero Maintenance</p>
+            <p>Videos sync automatically from YouTube. No video files on your server means no storage costs. The site is lightweight, fast, and built to run without constant attention. Focus on creating — the site handles the rest.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 mt-8 text-center">
+      <p class="text-amber-900 font-semibold mb-1">Need help?</p>
+      <p class="text-amber-800 text-sm">This site was built as a birthday gift for you. If anything breaks or you need changes, reach out to the person who gave it to you.</p>
+    </div>
+  </div>
+</div>
