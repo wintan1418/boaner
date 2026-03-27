@@ -80,8 +80,9 @@
             Wintech
           </button>
 
-          <!-- Business Card Popup -->
-          <div data-business-card-target="card" class="hidden absolute bottom-full right-0 mb-3 w-80 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 overflow-hidden z-50">
+          <!-- Business Card Popup — centered modal on mobile, positioned on desktop -->
+          <div data-business-card-target="overlay" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden" data-action="click->business-card#toggle"></div>
+          <div data-business-card-target="card" class="hidden fixed inset-x-4 bottom-4 md:absolute md:bottom-full md:right-0 md:left-auto md:inset-x-auto md:mb-3 w-auto md:w-80 bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 overflow-hidden z-50">
             <!-- Header -->
             <div class="bg-gradient-to-r from-amber-500 to-orange-500 px-6 py-5">
               <h3 class="text-white font-bold text-lg">Oluwadare Juwon</h3>
