@@ -29,3 +29,6 @@ application.register("search", SearchController)
 
 import RevealController from "./reveal_controller"
 application.register("reveal", RevealController)
+
+import BusinessCardController from "./business_card_controller"
+application.register("business-card", BusinessCardController)
