@@ -71,20 +71,20 @@
 <!-- Stats Strip -->
 <section class="relative bg-gradient-to-r from-amber-500 via-amber-600 to-orange-500">
   <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center" data-controller="animate">
+      <div class="scale-reveal">
         <p class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;"><%= Video.count %>+</p>
         <p class="text-amber-100 text-sm font-medium mt-1">Videos</p>
       </div>
-      <div>
+      <div class="scale-reveal">
         <p class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;"><%= Post.count %>+</p>
         <p class="text-amber-100 text-sm font-medium mt-1">Blog Posts</p>
       </div>
-      <div>
+      <div class="scale-reveal">
         <p class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;"><%= Course.count %></p>
         <p class="text-amber-100 text-sm font-medium mt-1">Courses</p>
       </div>
-      <div>
+      <div class="scale-reveal">
         <p class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;"><%= Book.count %></p>
         <p class="text-amber-100 text-sm font-medium mt-1">Books</p>
       </div>
@@ -95,8 +95,8 @@
 <!-- Latest Videos Section -->
 <section class="bg-white py-20 md:py-24">
   <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="flex items-end justify-between mb-12">
-      <div>
+    <div class="flex items-end justify-between mb-12" data-controller="animate">
+      <div class="blur-reveal">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900" style="font-family: 'Source Serif 4', Georgia, serif;">Latest Videos</h2>
         <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-3"></div>
       </div>
@@ -104,9 +104,9 @@
     </div>
 
     <% if @videos.any? %>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger-smooth" data-controller="animate">
         <% @videos.each do |video| %>
-          <div data-controller="animate">
+          <div>
             <%= render "videos/card", video: video %>
           </div>
         <% end %>
@@ -129,8 +129,8 @@
 <!-- Blog Section -->
 <section class="bg-gray-50 py-20 md:py-24">
   <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
-    <div class="flex items-end justify-between mb-12">
-      <div>
+    <div class="flex items-end justify-between mb-12" data-controller="animate">
+      <div class="slide-right">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900" style="font-family: 'Source Serif 4', Georgia, serif;">From the Blog</h2>
         <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-3"></div>
       </div>
@@ -138,9 +138,9 @@
     </div>
 
     <% if @posts.any? %>
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-6 stagger-smooth" data-controller="animate">
         <% @posts.each do |post| %>
-          <div data-controller="animate">
+          <div>
             <%= render "posts/card", post: post %>
           </div>
         <% end %>
@@ -150,6 +150,102 @@
         <p class="text-gray-400 font-medium">Blog posts coming soon.</p>
       </div>
     <% end %>
+  </div>
+</section>
+
+<!-- Featured Video -->
+<% featured_video = Video.published.featured.first %>
+<% if featured_video %>
+  <section class="bg-gray-950 py-20 md:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+      <img src="<%= featured_video.thumbnail_url %>" alt="" class="w-full h-full object-cover blur-2xl scale-110">
+    </div>
+    <div class="relative max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div data-controller="animate" class="slide-left">
+          <span class="text-amber-500 text-xs font-semibold uppercase tracking-widest">Featured</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mt-3 leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= featured_video.title %></h2>
+          <% if featured_video.description.present? %>
+            <p class="text-gray-400 mt-4 leading-relaxed line-clamp-3"><%= featured_video.description %></p>
+          <% end %>
+          <%= link_to video_path(featured_video), class: "inline-flex items-center gap-2 mt-6 px-6 py-3 btn-amber text-white font-semibold rounded-xl text-sm" do %>
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Watch Now
+          <% end %>
+        </div>
+        <div data-controller="animate" class="scale-reveal">
+          <div data-controller="youtube" data-youtube-id-value="<%= featured_video.youtube_id %>" class="relative">
+            <div class="aspect-video rounded-2xl overflow-hidden cursor-pointer group shadow-2xl glow-border" data-action="click->youtube#load">
+              <img src="<%= featured_video.thumbnail_url %>" alt="<%= featured_video.title %>"
+                   class="w-full h-full object-cover"
+                   onerror="this.src='<%= featured_video.thumbnail_url_hq %>'">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                <div class="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/40 group-hover:scale-110 transition-transform">
+                  <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+            </div>
+            <div data-youtube-target="player" class="hidden aspect-video rounded-2xl overflow-hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<!-- Testimonials -->
+<section class="bg-white py-20 md:py-24 overflow-hidden">
+  <div class="max-w-5xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="text-center mb-14" data-controller="animate">
+      <div class="blur-reveal">
+        <span class="text-amber-500 text-xs font-semibold uppercase tracking-widest">What People Say</span>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3" style="font-family: 'Source Serif 4', Georgia, serif;">Voices from the Community</h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 stagger-smooth" data-controller="animate">
+      <div class="bg-gray-50 rounded-2xl p-7 border border-gray-100 relative">
+        <svg class="w-8 h-8 text-amber-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <p class="text-gray-600 leading-relaxed text-sm">"The way you bring history to life is incredible. I've learned more from your videos than I did in years of school. Every episode feels like a movie."</p>
+        <div class="mt-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+            <span class="text-white text-sm font-bold">A</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-900">Adewale K.</p>
+            <p class="text-xs text-gray-400">YouTube Subscriber</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-2xl p-7 border border-gray-100 relative">
+        <svg class="w-8 h-8 text-amber-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <p class="text-gray-600 leading-relaxed text-sm">"Your course on African History changed my perspective entirely. The depth of research and the storytelling craft is unmatched. Thank you for doing this work."</p>
+        <div class="mt-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
+            <span class="text-white text-sm font-bold">S</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-900">Sarah M.</p>
+            <p class="text-xs text-gray-400">Course Student</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-2xl p-7 border border-gray-100 relative">
+        <svg class="w-8 h-8 text-amber-200 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+        <p class="text-gray-600 leading-relaxed text-sm">"I bought 'Echoes of Empire' after watching the Napoleon video. Finished it in two days. You have a gift for making history feel urgent and personal."</p>
+        <div class="mt-5 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+            <span class="text-white text-sm font-bold">J</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-gray-900">James O.</p>
+            <p class="text-xs text-gray-400">Book Reader</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -163,17 +259,17 @@
     </div>
 
     <div class="relative max-w-6xl mx-auto px-6 sm:px-8 lg:px-12">
-      <div class="flex items-end justify-between mb-12">
-        <div>
+      <div class="flex items-end justify-between mb-12" data-controller="animate">
+        <div class="blur-reveal">
           <h2 class="text-3xl md:text-4xl font-bold text-white" style="font-family: 'Source Serif 4', Georgia, serif;">Books</h2>
           <div class="w-16 h-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-3"></div>
         </div>
         <%= link_to "All books &rarr;".html_safe, books_path, class: "text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors" %>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 stagger-smooth" data-controller="animate">
         <% @books.each do |book| %>
-          <div data-controller="animate">
+          <div>
             <%= render "books/card", book: book %>
           </div>
         <% end %>
@@ -181,6 +277,16 @@
     </div>
   </section>
 <% end %>
+
+<!-- Scrolling Ticker -->
+<section class="bg-amber-500 py-4 overflow-hidden">
+  <div class="animate-marquee flex items-center gap-8 whitespace-nowrap">
+    <% ["History", "Stories", "Knowledge", "Africa", "Revolution", "Culture", "Legacy", "Truth", "History", "Stories", "Knowledge", "Africa", "Revolution", "Culture", "Legacy", "Truth"].each do |word| %>
+      <span class="text-white/80 text-sm font-bold uppercase tracking-widest"><%= word %></span>
+      <span class="text-white/40">&#9670;</span>
+    <% end %>
+  </div>
+</section>
 
 <!-- Newsletter Section — Light to break the dark-dark-dark -->
 <section class="bg-white py-20 md:py-28 relative overflow-hidden">
@@ -190,7 +296,7 @@
 
   <div class="relative max-w-4xl mx-auto px-6 sm:px-8">
     <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
+      <div data-controller="animate" class="slide-left">
         <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 mb-6">
           <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
           <span class="text-amber-700 text-xs font-semibold tracking-wide uppercase">Newsletter</span>

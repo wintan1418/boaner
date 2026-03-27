@@ -303,3 +303,199 @@ main { animation: page-enter 0.4s ease-out; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ═══════════════════════════════════════════════
+   WORLD-CLASS SECTION TRANSITIONS
+   ═══════════════════════════════════════════════ */
+
+/* Slide from left */
+.slide-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.slide-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale reveal */
+.scale-reveal {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scale-reveal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Blur reveal — comes from blurred to sharp */
+.blur-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, filter 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.blur-reveal.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Clip reveal — reveals from bottom via clip-path */
+.clip-reveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.clip-reveal.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Rotate in */
+.rotate-reveal {
+  opacity: 0;
+  transform: rotate(-3deg) translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rotate-reveal.visible {
+  opacity: 1;
+  transform: rotate(0) translateY(0);
+}
+
+/* Text line-by-line reveal */
+.text-reveal > * {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.text-reveal.visible > *:nth-child(1) { transition-delay: 0s; }
+.text-reveal.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.text-reveal.visible > *:nth-child(3) { transition-delay: 0.24s; }
+.text-reveal.visible > *:nth-child(4) { transition-delay: 0.36s; }
+.text-reveal.visible > *:nth-child(5) { transition-delay: 0.48s; }
+.text-reveal.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax-ready utility */
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* Counter animate — number counts up */
+@keyframes count-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Magnetic hover — element follows cursor slightly */
+.magnetic-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Glowing border animation */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.3); }
+}
+.glow-border {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Marquee/ticker animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Smooth image reveal */
+.image-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.image-reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #111827;
+  transform-origin: right;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.image-reveal.visible::after {
+  transform: scaleX(0);
+}
+
+/* Enhanced stagger — more children, smoother */
+.stagger-smooth > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger-smooth.visible > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-smooth.visible > *:nth-child(2) { transition-delay: 80ms; }
+.stagger-smooth.visible > *:nth-child(3) { transition-delay: 160ms; }
+.stagger-smooth.visible > *:nth-child(4) { transition-delay: 240ms; }
+.stagger-smooth.visible > *:nth-child(5) { transition-delay: 320ms; }
+.stagger-smooth.visible > *:nth-child(6) { transition-delay: 400ms; }
+.stagger-smooth.visible > *:nth-child(7) { transition-delay: 480ms; }
+.stagger-smooth.visible > *:nth-child(8) { transition-delay: 560ms; }
+.stagger-smooth.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Testimonial card float */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-6px) rotate(0.5deg); }
+  66% { transform: translateY(-3px) rotate(-0.5deg); }
+}
+.float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+}
+
+/* Section diagonal clip */
+.diagonal-top {
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+}
+.diagonal-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+/* Horizontal line grow */
+.line-grow {
+  width: 0;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.line-grow.visible {
+  width: 4rem;
+}
+
+/* Typing cursor */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink::after {
+  content: '|';
+  animation: blink-cursor 1s ease-in-out infinite;
+  color: #f59e0b;
+  margin-left: 2px;
+}
