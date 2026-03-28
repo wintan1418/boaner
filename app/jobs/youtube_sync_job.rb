@@ -1,16 +1,20 @@
 class YoutubeSyncJob < ApplicationJob
   queue_as :default
 
-  def perform
-    settings = SiteSetting.instance
-    return unless settings.youtube_auto_sync?
-
-    result = YoutubeSyncService.new.sync!
-
-    if result[:error]
-      Rails.logger.warn "YouTube sync failed: #{result[:error]}"
+  def perform(channel_id = nil)
+    if channel_id
+      channel = YoutubeChannel.find(channel_id)
+      result = YoutubeSyncService.new(channel).sync!
+      Rails.logger.info "YouTube sync [#{channel.name}]: #{result[:created]} new, #{result[:updated]} updated"
     else
-      Rails.logger.info "YouTube sync: #{result[:created]} created, #{result[:updated]} updated (#{result[:total]} total)"
+      results = YoutubeSyncService.sync_all!
+      results.each do |r|
+        if r[:error]
+          Rails.logger.warn "YouTube sync [#{r[:channel]}] failed: #{r[:error]}"
+        else
+          Rails.logger.info "YouTube sync [#{r[:channel]}]: #{r[:created]} new, #{r[:updated]} updated"
+        end
+      end
     end
   end
 end

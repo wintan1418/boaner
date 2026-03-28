@@ -1,0 +1,66 @@
+<% content_for(:title, "YouTube Channels — Boaner Admin") %>
+
+<div class="flex items-center justify-between mb-8">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">YouTube Channels</h1>
+    <p class="text-gray-500 text-sm mt-1">Manage your connected YouTube channels.</p>
+  </div>
+  <a href="<%= new_admin_youtube_channel_path %>" class="inline-flex items-center gap-2 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+    Add Channel
+  </a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+  <% if @channels.any? %>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Channel ID</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Videos</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Auto-sync</th>
+          <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Last Synced</th>
+          <th class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <% @channels.each do |channel| %>
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-6 py-4 text-sm font-medium text-gray-900"><%= channel.name %></td>
+            <td class="px-6 py-4 text-sm text-gray-500 font-mono"><%= truncate(channel.channel_id, length: 20) %></td>
+            <td class="px-6 py-4 text-sm text-gray-500"><%= channel.videos.count %></td>
+            <td class="px-6 py-4">
+              <% if channel.auto_sync? %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">On</span>
+              <% else %>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">Off</span>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500">
+              <%= channel.last_synced_at ? time_ago_in_words(channel.last_synced_at) + " ago" : "Never" %>
+            </td>
+            <td class="px-6 py-4 text-right">
+              <div class="flex items-center justify-end gap-2">
+                <%= button_to sync_admin_youtube_channel_path(channel), method: :post, class: "inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 text-white text-xs font-semibold rounded-lg hover:bg-gray-800 transition-colors cursor-pointer" do %>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Sync Now
+                <% end %>
+                <a href="<%= edit_admin_youtube_channel_path(channel) %>" class="text-amber-600 hover:text-amber-700 text-sm font-medium">Edit</a>
+                <%= button_to admin_youtube_channel_path(channel), method: :delete, data: { turbo_confirm: "Delete #{channel.name}?" }, class: "text-red-500 hover:text-red-700 text-sm font-medium cursor-pointer" do %>
+                  Delete
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="text-center py-16">
+      <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+      <p class="text-gray-500 font-medium">No channels yet.</p>
+      <p class="text-gray-400 text-sm mt-1">Add a YouTube channel to get started.</p>
+    </div>
+  <% end %>
+</div>

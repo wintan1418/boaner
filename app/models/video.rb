@@ -1,5 +1,6 @@
 class Video < ApplicationRecord
   belongs_to :series, optional: true
+  belongs_to :youtube_channel, optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
   validates :title, presence: true
@@ -8,6 +9,7 @@ class Video < ApplicationRecord
   scope :featured, -> { where(featured: true) }
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :by_category, ->(cat) { where(category: cat) if cat.present? }
+  scope :by_channel, ->(channel_id) { where(youtube_channel_id: channel_id) if channel_id.present? }
 
   def thumbnail_url
     "https://img.youtube.com/vi/#{youtube_id}/maxresdefault.jpg"

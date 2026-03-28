@@ -46,9 +46,15 @@
       </div>
     </div>
 
-    <div>
-      <label for="video_series_id" class="block text-sm font-semibold text-gray-700 mb-1.5">Series</label>
-      <%= f.collection_select :series_id, Series.order(:title), :id, :title, { include_blank: "— No series —" }, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition" %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="video_series_id" class="block text-sm font-semibold text-gray-700 mb-1.5">Series</label>
+        <%= f.collection_select :series_id, Series.order(:title), :id, :title, { include_blank: "— No series —" }, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition" %>
+      </div>
+      <div>
+        <label for="video_youtube_channel_id" class="block text-sm font-semibold text-gray-700 mb-1.5">Channel</label>
+        <%= f.collection_select :youtube_channel_id, YoutubeChannel.order(:name), :id, :name, { include_blank: "— No channel —" }, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition" %>
+      </div>
     </div>
 
     <div class="flex items-center">

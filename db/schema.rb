@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_27_112120) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_28_213836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -336,7 +336,19 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_112120) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "series_id"
+    t.bigint "youtube_channel_id"
     t.index ["series_id"], name: "index_videos_on_series_id"
+    t.index ["youtube_channel_id"], name: "index_videos_on_youtube_channel_id"
+  end
+
+  create_table "youtube_channels", force: :cascade do |t|
+    t.string "name"
+    t.string "channel_id"
+    t.string "api_key"
+    t.boolean "auto_sync"
+    t.datetime "last_synced_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -349,4 +361,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_27_112120) do
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "videos", "series"
+  add_foreign_key "videos", "youtube_channels"
 end

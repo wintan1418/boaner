@@ -130,37 +130,11 @@
       </div>
     </div>
 
-    <!-- YouTube Auto-Sync -->
+    <!-- YouTube Channels -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 class="text-lg font-semibold text-gray-900 mb-1">YouTube Auto-Sync</h2>
-      <p class="text-sm text-gray-500 mb-6">Connect your YouTube channel to automatically import new videos. Runs every 6 hours.</p>
-
-      <div class="space-y-6">
-        <div>
-          <label for="site_setting_youtube_channel_id" class="block text-sm font-semibold text-gray-700 mb-1.5">Channel ID</label>
-          <%= f.text_field :youtube_channel_id, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition", placeholder: "UCxxxxxxxxxxxxxxxxxxxxxxxx" %>
-          <p class="text-xs text-gray-400 mt-1">Find it at youtube.com/account_advanced or in your channel URL.</p>
-        </div>
-        <div>
-          <label for="site_setting_youtube_api_key" class="block text-sm font-semibold text-gray-700 mb-1.5">YouTube API Key</label>
-          <%= f.text_field :youtube_api_key, class: "w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition", placeholder: "AIzaSy..." %>
-          <p class="text-xs text-gray-400 mt-1">Get a free API key from <a href="https://console.cloud.google.com/apis/credentials" target="_blank" class="text-amber-600 hover:underline">Google Cloud Console</a>. Enable the YouTube Data API v3.</p>
-        </div>
-        <div class="flex items-center gap-3">
-          <%= f.check_box :youtube_auto_sync, class: "w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-500" %>
-          <%= f.label :youtube_auto_sync, "Enable automatic sync (every 6 hours)", class: "text-sm text-gray-700" %>
-        </div>
-      </div>
-
-      <% if @settings.youtube_channel_id.present? && @settings.youtube_api_key.present? %>
-        <div class="border-t border-gray-100 pt-4 mt-2">
-          <%= button_to "Sync Now", sync_youtube_admin_settings_path, method: :post, class: "inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors cursor-pointer" do %>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            Sync YouTube Now
-          <% end %>
-          <p class="text-xs text-gray-400 mt-2">Fetches latest videos from your channel immediately.</p>
-        </div>
-      <% end %>
+      <h2 class="text-lg font-semibold text-gray-900 mb-1">YouTube Channels</h2>
+      <p class="text-sm text-gray-500 mb-4">Manage your YouTube channels and auto-sync settings.</p>
+      <%= link_to "Manage Channels", admin_youtube_channels_path, class: "inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-800 transition-colors" %>
     </div>
 
     <!-- Submit -->

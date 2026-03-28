@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       post :send_newsletter, on: :member
     end
     resources :series
+    resources :youtube_channels do
+      post :sync, on: :member
+    end
     get "guide", to: "guide#index"
     resource :settings, only: [ :edit, :update ] do
       post :sync_youtube, on: :member

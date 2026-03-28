@@ -27,6 +27,20 @@
     </div>
   <% end %>
 
+  <% if @channels.any? %>
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider self-center mr-2">Channel:</span>
+      <%= link_to "All", videos_path(category: params[:category]),
+        class: "px-3 py-1.5 rounded-lg text-xs font-medium transition-all #{params[:channel].blank? ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-amber-50 hover:text-amber-700'}",
+        data: { turbo_frame: "videos_grid" } %>
+      <% @channels.each do |ch| %>
+        <%= link_to ch.name, videos_path(category: params[:category], channel: ch.id),
+          class: "px-3 py-1.5 rounded-lg text-xs font-medium transition-all #{params[:channel].to_s == ch.id.to_s ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600 hover:bg-amber-50 hover:text-amber-700'}",
+          data: { turbo_frame: "videos_grid" } %>
+      <% end %>
+    </div>
+  <% end %>
+
   <%= turbo_frame_tag "videos_grid" do %>
     <% if @videos.any? %>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">

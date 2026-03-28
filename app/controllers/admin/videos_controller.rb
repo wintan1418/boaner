@@ -46,7 +46,7 @@ module Admin
     end
 
     def video_params
-      params.require(:video).permit(:title, :youtube_id, :description, :category, :published_at, :featured, :series_id)
+      params.require(:video).permit(:title, :youtube_id, :description, :category, :published_at, :featured, :series_id, :youtube_channel_id)
     end
   end
 end

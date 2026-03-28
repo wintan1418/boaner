@@ -1,7 +1,8 @@
 class VideosController < ApplicationController
   def index
-    @videos = Video.published.by_category(params[:category])
+    @videos = Video.published.by_category(params[:category]).by_channel(params[:channel])
     @categories = Video.distinct.pluck(:category).compact
+    @channels = YoutubeChannel.joins(:videos).distinct.order(:name)
 
     respond_to do |format|
       format.html
