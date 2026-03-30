@@ -1,3 +1,7 @@
+require "net/http"
+require "json"
+require "uri"
+
 class YoutubeSyncService
   API_BASE = "https://www.googleapis.com/youtube/v3"
 
