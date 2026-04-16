@@ -4,6 +4,11 @@ module Admin
 
     def index
       @videos = Video.order(created_at: :desc)
+      @videos = @videos.where("title ILIKE :q OR description ILIKE :q", q: "%#{params[:q]}%") if params[:q].present?
+      @videos = @videos.where(category: params[:category]) if params[:category].present?
+      @videos = @videos.where(youtube_channel_id: params[:channel]) if params[:channel].present?
+      @categories = Video.distinct.pluck(:category).compact.sort
+      @channels = YoutubeChannel.order(:name)
     end
 
     def show

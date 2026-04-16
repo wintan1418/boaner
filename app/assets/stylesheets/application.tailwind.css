@@ -204,6 +204,43 @@ trix-editor {
   line-height: 1.7;
 }
 
+/* Trix alignment support — both inline and block */
+.trix-content [style*="text-align: left"],
+.prose-content [style*="text-align: left"] { text-align: left; }
+.trix-content [style*="text-align: center"],
+.prose-content [style*="text-align: center"] { text-align: center; }
+.trix-content [style*="text-align: right"],
+.prose-content [style*="text-align: right"] { text-align: right; }
+.trix-content [style*="text-align: justify"],
+.prose-content [style*="text-align: justify"] { text-align: justify; }
+
+/* Custom Trix toolbar buttons */
+.trix-button-group--alignment-tools .trix-button,
+.trix-button-group--heading-tools .trix-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 1.6rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #4b5563;
+  border-radius: 4px;
+  margin: 0 1px;
+}
+.trix-button-group--alignment-tools .trix-button:hover,
+.trix-button-group--heading-tools .trix-button:hover {
+  background: #fef3c7;
+  color: #b45309;
+}
+.trix-button-group--alignment-tools .trix-button.trix-active,
+.trix-button-group--heading-tools .trix-button.trix-active {
+  background: #fbbf24;
+  color: white;
+}
+
 /* Hero background pattern */
 .hero-pattern {
   background-image: radial-gradient(circle at 25% 25%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),

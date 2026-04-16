@@ -32,3 +32,9 @@ application.register("reveal", RevealController)
 
 import BusinessCardController from "./business_card_controller"
 application.register("business-card", BusinessCardController)
+
+import AutoSubmitController from "./auto_submit_controller"
+application.register("auto-submit", AutoSubmitController)
+
+import RichEditorController from "./rich_editor_controller"
+application.register("rich-editor", RichEditorController)

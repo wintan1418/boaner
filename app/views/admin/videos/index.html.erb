@@ -11,6 +11,57 @@
   </a>
 </div>
 
+<!-- Search & Filters -->
+<%= form_with url: admin_videos_path, method: :get, class: "mb-6", data: { controller: "auto-submit" } do %>
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <!-- Search -->
+      <div class="md:col-span-1">
+        <div class="relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" name="q" value="<%= params[:q] %>" placeholder="Search videos by title or description..."
+                 class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition">
+        </div>
+      </div>
+
+      <!-- Category -->
+      <div>
+        <select name="category" data-action="change->auto-submit#submit"
+                class="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition bg-white">
+          <option value="">All Categories</option>
+          <% @categories.each do |cat| %>
+            <option value="<%= cat %>" <%= "selected" if params[:category] == cat %>><%= cat %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <!-- Channel + Submit -->
+      <div class="flex gap-2">
+        <% if @channels.any? %>
+          <select name="channel" data-action="change->auto-submit#submit"
+                  class="flex-1 px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition bg-white">
+            <option value="">All Channels</option>
+            <% @channels.each do |ch| %>
+              <option value="<%= ch.id %>" <%= "selected" if params[:channel].to_s == ch.id.to_s %>><%= ch.name %></option>
+            <% end %>
+          </select>
+        <% end %>
+        <button type="submit" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors">
+          Search
+        </button>
+        <% if params[:q].present? || params[:category].present? || params[:channel].present? %>
+          <%= link_to admin_videos_path, class: "px-3 py-2.5 text-gray-500 hover:text-gray-800 text-sm font-medium transition-colors", title: "Clear filters" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <% if params[:q].present? || params[:category].present? || params[:channel].present? %>
+      <p class="text-xs text-gray-500 mt-3"><%= @videos.count %> result<%= @videos.count == 1 ? '' : 's' %> found</p>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
   <table class="w-full">
     <thead>
