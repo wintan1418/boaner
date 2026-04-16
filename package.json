@@ -13,6 +13,7 @@
     "@hotwired/turbo-rails": "^8.0.23",
     "@rails/actiontext": "^8.1.300",
     "@tailwindcss/cli": "^4.2.2",
+    "quill": "^2.0.3",
     "tailwindcss": "^4.2.2",
     "trix": "^2.1.17"
   }
