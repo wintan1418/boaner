@@ -575,9 +575,9 @@ main { animation: page-enter 0.4s ease-out; }
 /* Display typography — massive editorial headlines */
 .display-headline {
   font-family: 'Source Serif 4', Georgia, serif;
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 /* Drop cap for first letter */
@@ -806,9 +806,9 @@ main { animation: page-enter 0.4s ease-out; }
 /* MASSIVE display type — up to 20rem */
 .mega-headline {
   font-family: 'Source Serif 4', Georgia, serif;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.88;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
 }
 
 /* Outlined variant */
