@@ -106,9 +106,9 @@ class YoutubeSyncService
     elsif text.match?(/lecture|lesson|teach|class|course|education/)
       "Lecture"
     elsif text.match?(/review|book|read/)
-      "Review"
+      "Spiritual"
     else
-      "Video"
+      "Music"
     end
   end
 
