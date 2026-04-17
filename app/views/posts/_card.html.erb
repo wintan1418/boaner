@@ -1,29 +1,36 @@
-<%= link_to post_path(post), data: { turbo_frame: "_top" }, class: "editorial-card group block bg-white p-8 border-l-2 border-amber-500 hover:border-amber-600 shadow-sm relative overflow-hidden" do %>
-  <!-- Decorative post number -->
-  <div class="absolute top-6 right-6 section-number text-3xl select-none"><%= post.id.to_s.rjust(2, '0') %></div>
+<%= link_to post_path(post), data: { turbo_frame: "_top" }, class: "group block" do %>
+  <article class="relative h-full bg-white border border-gray-100 hover:border-gray-200 p-10 transition-all duration-500">
+    <!-- Number in top-right -->
+    <span class="absolute top-10 right-10 text-gray-200 group-hover:text-amber-400 text-xs font-medium tracking-[0.2em] transition-colors">№ <%= post.id.to_s.rjust(2, '0') %></span>
 
-  <div class="flex items-center gap-3 text-xs mb-4">
-    <% if post.category.present? %>
-      <span class="text-amber-600 font-semibold uppercase tracking-[0.2em]"><%= post.category %></span>
+    <!-- Meta -->
+    <div class="flex items-center gap-3 text-[10px] tracking-[0.25em] uppercase mb-8">
+      <% if post.category.present? %>
+        <span class="text-amber-600 font-semibold"><%= post.category %></span>
+        <span class="text-gray-300">·</span>
+      <% end %>
+      <% if post.published_at %>
+        <span class="text-gray-400"><%= post.published_at.strftime("%b %d, %Y") %></span>
+      <% end %>
+    </div>
+
+    <!-- Title -->
+    <h3 class="display-headline text-gray-900 text-2xl md:text-3xl group-hover:text-amber-700 transition-colors duration-500 leading-[1.15] mb-4 pr-12">
+      <%= post.title %>
+    </h3>
+
+    <!-- Excerpt -->
+    <% if post.excerpt.present? %>
+      <p class="text-gray-500 text-base leading-relaxed line-clamp-2 mb-10" style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 400;"><%= post.excerpt %></p>
     <% end %>
-    <span class="text-gray-300">—</span>
-    <% if post.published_at %>
-      <span class="text-gray-400"><%= post.published_at.strftime("%b %d, %Y") %></span>
-    <% end %>
-    <span class="text-gray-300">—</span>
-    <span class="text-gray-400"><%= post.reading_time %></span>
-  </div>
 
-  <h3 class="display-headline text-2xl text-gray-900 group-hover:text-amber-700 transition-colors leading-tight mb-3 pr-12">
-    <%= post.title %>
-  </h3>
-
-  <% if post.excerpt.present? %>
-    <p class="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-5" style="font-family: 'Source Serif 4', Georgia, serif;"><%= post.excerpt %></p>
-  <% end %>
-
-  <div class="arrow-link text-xs font-bold text-amber-600 group-hover:text-amber-700 flex items-center gap-2 uppercase tracking-[0.2em] pt-3 border-t border-gray-100">
-    <span>Continue reading</span>
-    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-  </div>
+    <!-- Footer -->
+    <div class="flex items-center justify-between pt-6 border-t border-gray-100">
+      <span class="text-gray-400 text-xs font-medium"><%= post.reading_time %></span>
+      <span class="inline-flex items-center gap-2 text-amber-600 group-hover:text-amber-700 text-xs font-semibold tracking-[0.2em] uppercase transition-colors">
+        <span>Read</span>
+        <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </span>
+    </div>
+  </article>
 <% end %>

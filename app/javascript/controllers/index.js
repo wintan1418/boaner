@@ -47,6 +47,3 @@ application.register("kinetic", KineticController)
 
 import ParallaxController from "./parallax_controller"
 application.register("parallax", ParallaxController)
-
-import CursorController from "./cursor_controller"
-application.register("cursor", CursorController)

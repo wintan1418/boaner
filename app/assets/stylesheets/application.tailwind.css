@@ -862,50 +862,7 @@ main { animation: page-enter 0.4s ease-out; }
   color: white;
 }
 
-/* Custom cursor (desktop only) */
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button, [data-controller*="youtube"], input, textarea, select { cursor: none; }
-}
-.cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 6px;
-  height: 6px;
-  background: #f59e0b;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  margin-left: -3px;
-  margin-top: -3px;
-  transition: transform 0.1s linear;
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 32px;
-  height: 32px;
-  border: 1.5px solid rgba(245, 158, 11, 0.8);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  margin-left: -16px;
-  margin-top: -16px;
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, margin 0.3s ease;
-  mix-blend-mode: difference;
-}
-.cursor-hover {
-  width: 60px;
-  height: 60px;
-  margin-left: -30px;
-  margin-top: -30px;
-  border-color: rgba(245, 158, 11, 1);
-  background: rgba(245, 158, 11, 0.1);
-}
-@media (pointer: coarse) {
-  .cursor-dot, .cursor-ring { display: none; }
-}
+/* Custom cursor removed — caused visibility issues */
 
 /* Section number — HUGE decorative */
 .mega-section-number {
