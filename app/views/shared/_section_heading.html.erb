@@ -1,0 +1,37 @@
+<%#
+  Editorial section heading.
+  Usage:
+    <%= render "shared/section_heading",
+        number: "01",
+        eyebrow: "Watch",
+        title: "Latest Videos",
+        subtitle: "Stories and lessons from my YouTube channel",
+        link_text: "View all",
+        link_path: videos_path,
+        dark: false %>
+%>
+<div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+  <div data-controller="animate" class="blur-reveal">
+    <div class="flex items-center gap-4 mb-4">
+      <% if local_assigns[:number].present? %>
+        <span class="section-number"><%= number %> —</span>
+      <% end %>
+      <span class="section-eyebrow <%= 'text-amber-400' if local_assigns[:dark] %>"><%= eyebrow %></span>
+    </div>
+    <h2 class="display-headline text-4xl md:text-5xl <%= local_assigns[:dark] ? 'text-white' : 'text-gray-900' %>">
+      <%= title %>
+    </h2>
+    <% if local_assigns[:subtitle].present? %>
+      <p class="mt-3 text-base <%= local_assigns[:dark] ? 'text-gray-400' : 'text-gray-500' %> max-w-lg">
+        <%= subtitle %>
+      </p>
+    <% end %>
+    <div class="w-12 h-0.5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full mt-6"></div>
+  </div>
+  <% if local_assigns[:link_text].present? && local_assigns[:link_path].present? %>
+    <%= link_to link_path, class: "arrow-link text-sm font-semibold #{local_assigns[:dark] ? 'text-amber-400 hover:text-amber-300' : 'text-amber-600 hover:text-amber-700'} transition-colors shrink-0" do %>
+      <span><%= link_text %></span>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    <% end %>
+  <% end %>
+</div>

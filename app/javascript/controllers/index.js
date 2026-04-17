@@ -38,3 +38,9 @@ application.register("auto-submit", AutoSubmitController)
 
 import RichEditorController from "./rich_editor_controller"
 application.register("rich-editor", RichEditorController)
+
+import ScrollProgressController from "./scroll_progress_controller"
+application.register("scroll-progress", ScrollProgressController)
+
+import KineticController from "./kinetic_controller"
+application.register("kinetic", KineticController)

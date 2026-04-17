@@ -8,13 +8,13 @@
 %>
 
 <div class="group">
-  <!-- Book cover with 3D tilt effect -->
-  <div class="relative mx-auto w-48 mb-6" style="perspective: 800px;">
-    <div class="relative transition-transform duration-500 group-hover:rotate-y-[-8deg]" style="transform-style: preserve-3d;">
-      <!-- Spine shadow -->
-      <div class="absolute left-0 top-2 bottom-2 w-3 bg-gradient-to-r from-black/30 to-transparent rounded-l-sm"></div>
-      <!-- Cover -->
-      <div class="aspect-[2/3] rounded-lg overflow-hidden shadow-xl ring-1 ring-black/10 group-hover:shadow-2xl transition-shadow duration-500">
+  <!-- Book cover — squared corners, subtle spine shadow -->
+  <div class="relative mx-auto w-52 mb-6" style="perspective: 1000px;">
+    <div class="relative transition-transform duration-700 group-hover:translate-y-[-6px]" style="transform-style: preserve-3d;">
+      <!-- Spine shadow on left -->
+      <div class="absolute left-0 top-2 bottom-2 w-2 bg-gradient-to-r from-black/40 to-transparent"></div>
+      <!-- Cover — squared -->
+      <div class="aspect-[2/3] overflow-hidden shadow-xl ring-1 ring-black/10 group-hover:shadow-2xl transition-shadow duration-500">
         <% if book.cover.attached? %>
           <%= image_tag book.cover, class: "w-full h-full object-cover", alt: book.title %>
         <% else %>
@@ -25,23 +25,23 @@
         <% end %>
       </div>
       <!-- Bottom page edges -->
-      <div class="absolute bottom-0 left-1 right-1 h-2 bg-gradient-to-b from-gray-200 to-gray-300 rounded-b-sm -mb-1"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-b from-gray-300 to-gray-400 -mb-1"></div>
     </div>
   </div>
 
   <!-- Book info -->
   <div class="text-center">
-    <h3 class="font-bold text-white text-lg leading-tight" style="font-family: 'Source Serif 4', Georgia, serif;"><%= book.title %></h3>
+    <h3 class="font-bold text-white text-lg leading-tight display-headline"><%= book.title %></h3>
     <% if book.published_year %>
-      <p class="text-amber-400/70 text-sm mt-1"><%= book.published_year %></p>
+      <p class="text-amber-400/70 text-xs mt-2 tracking-[0.2em] uppercase">MMXX &middot; <%= book.published_year %></p>
     <% end %>
     <% if book.description.present? %>
-      <p class="text-gray-400 text-sm mt-2 leading-relaxed line-clamp-2 max-w-xs mx-auto"><%= book.description %></p>
+      <p class="text-gray-400 text-sm mt-3 leading-relaxed line-clamp-2 max-w-xs mx-auto"><%= book.description %></p>
     <% end %>
     <% if book.buy_url.present? %>
-      <%= link_to book.buy_url, target: "_blank", rel: "noopener", class: "inline-flex items-center gap-2 mt-4 px-6 py-2.5 btn-amber text-white text-sm font-semibold rounded-lg" do %>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"/></svg>
-        Buy Now
+      <%= link_to book.buy_url, target: "_blank", rel: "noopener", class: "arrow-link inline-flex items-center gap-2 mt-5 px-6 py-2.5 btn-amber text-white text-xs font-semibold rounded-full uppercase tracking-wider" do %>
+        <span>Buy Now</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       <% end %>
     <% end %>
   </div>
