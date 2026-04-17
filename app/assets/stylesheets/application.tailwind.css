@@ -783,3 +783,274 @@ main { animation: page-enter 0.4s ease-out; }
 .scroll-snap-x > * {
   scroll-snap-align: start;
 }
+
+/* ═══════════════════════════════════════════════
+   CINEMATIC FULL-BLEED STYLES
+   ═══════════════════════════════════════════════ */
+
+/* Hero with breathing scale animation */
+@keyframes slow-zoom {
+  0%, 100% { transform: scale(1.08); }
+  50% { transform: scale(1.15); }
+}
+.hero-breathe {
+  animation: slow-zoom 20s ease-in-out infinite;
+}
+
+/* Full-bleed hero ticker — continuous scroll */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* MASSIVE display type — up to 20rem */
+.mega-headline {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+}
+
+/* Outlined variant */
+.mega-outline {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent;
+}
+
+/* Glitch / offset shadow effect */
+.type-shadow {
+  text-shadow:
+    3px 3px 0 rgba(245, 158, 11, 0.6),
+    6px 6px 0 rgba(234, 88, 12, 0.3);
+}
+
+/* Film-poster style video card */
+.film-poster {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.film-poster::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+.film-poster:hover {
+  transform: scale(1.02);
+}
+.film-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.film-poster:hover img {
+  transform: scale(1.15);
+}
+.film-poster-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+}
+
+/* Custom cursor (desktop only) */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, [data-controller*="youtube"], input, textarea, select { cursor: none; }
+}
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px;
+  height: 6px;
+  background: #f59e0b;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  margin-left: -3px;
+  margin-top: -3px;
+  transition: transform 0.1s linear;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(245, 158, 11, 0.8);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  margin-left: -16px;
+  margin-top: -16px;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, margin 0.3s ease;
+  mix-blend-mode: difference;
+}
+.cursor-hover {
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  margin-top: -30px;
+  border-color: rgba(245, 158, 11, 1);
+  background: rgba(245, 158, 11, 0.1);
+}
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* Section number — HUGE decorative */
+.mega-section-number {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(6rem, 15vw, 14rem);
+  line-height: 1;
+  color: rgba(245, 158, 11, 0.08);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.05em;
+}
+
+/* Horizontal marquee for "As seen on" */
+.marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: ticker-scroll 40s linear infinite;
+  white-space: nowrap;
+  align-items: center;
+}
+
+/* Magazine feature card with overlay */
+.feature-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-end;
+  padding: 2.5rem;
+  color: white;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.9) 100%);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+.feature-card:hover {
+  transform: translateY(-4px);
+}
+.feature-card:hover img {
+  transform: scale(1.1);
+}
+.feature-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.feature-card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* Huge CTA button */
+.mega-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  box-shadow: 0 12px 40px -8px rgba(245, 158, 11, 0.6);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.mega-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 0;
+}
+.mega-cta:hover::before {
+  transform: translateY(0);
+}
+.mega-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 50px -8px rgba(245, 158, 11, 0.8);
+}
+.mega-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ghost / outline CTA */
+.ghost-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.5rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border-radius: 100px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+.ghost-cta:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Full-bleed section */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
+/* Vertical text */
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.3em;
+}
+
+/* Scroll-triggered reveal for film posters */
+.poster-reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.poster-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,0 +1,26 @@
+<%= link_to video_path(video), data: { turbo_frame: "_top" }, class: "film-poster block rounded-sm" do %>
+  <img src="<%= video.thumbnail_url %>"
+       alt="<%= video.title %>"
+       loading="lazy"
+       onerror="this.src='<%= video.thumbnail_url_hq %>'">
+  <div class="film-poster-content">
+    <div class="flex items-start justify-between">
+      <% if video.category.present? %>
+        <span class="text-amber-400 text-[10px] font-bold tracking-[0.3em] uppercase"><%= video.category %></span>
+      <% end %>
+      <span class="text-white/70 text-[10px] font-bold tracking-[0.3em] uppercase">№ <%= video.id.to_s.rjust(3, '0') %></span>
+    </div>
+    <div>
+      <% if video.published_at %>
+        <p class="text-white/60 text-[11px] font-semibold tracking-[0.2em] uppercase mb-3"><%= video.published_at.strftime("%b %d, %Y") %></p>
+      <% end %>
+      <h3 class="display-headline text-white text-2xl md:text-3xl leading-[0.95]"><%= video.title %></h3>
+      <div class="mt-4 flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center">
+          <svg class="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span class="text-white text-xs font-bold tracking-[0.2em] uppercase">Watch Now</span>
+      </div>
+    </div>
+  </div>
+<% end %>
